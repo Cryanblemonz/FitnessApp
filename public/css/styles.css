@@ -1,0 +1,18 @@
+body{
+        background-color: black;
+        color: white;
+        margin: 2%;
+}
+
+.newUserForm{
+        width: 70%;
+}
+
+.pw-warning{
+        font-size: 8px;
+        color: yellow;
+}
+
+.inches{
+        margin-top: 8px;
+}

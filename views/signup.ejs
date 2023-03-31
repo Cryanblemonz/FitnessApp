@@ -1,0 +1,63 @@
+<%- include('header.ejs') %>
+
+      <h1>Signup</h1>
+      
+      <form action="/newUser" method="post" class="newUserForm">
+        <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="Text" class="form-control" name="firstName" placeholder="eg: John Jacob">
+              </div>
+        <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="Text" class="form-control" name="lastName" placeholder="eg: JingleHeimerSchmidt">
+        </div>
+        <div class="mb-3">
+                <label for="userName" class="form-label">Create a username</label>
+                <input type="Text" class="form-control" name="userName" placeholder="eg: HotDad419-68">
+        </div>
+        <div class="mb-3">
+                <label for="password" class="form-label">Create a password
+                        <!-- delete after encrypting code is done  -->
+                        <span class="pw-warning">warning: this site is currently for demonstration purposes, passwords are not currently encrypted</span>
+                </label>
+                <input type="Text" class="form-control" name="userName" placeholder="eg: HotDad419-68">
+        </div>
+        <div class="mb-3">
+                <label for="Sex" class="form-label">Sex</label>
+                <select class="form-control" name="sex">
+                        <option> </option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                </select>
+        </div>
+        <div class="mb-3">
+                <label for="age" class="form-label">Age</label>
+                <input type="Number" class="form-control" name="age" min="0">
+        </div>
+        <div class="mb-3">
+                <label for="weight" class="form-label">Weight</label>
+                <input type="Number" class="form-control" name="weight" min="0">
+        </div>
+        <div class="height row">
+                <div class="col-md-6">
+                        <div class="mb-3">
+                                <label for="feet" class="form-label">Height</label>
+                                <input type="Number" class="form-control" name="feet" placeholder="feet" min="0">
+                        </div>
+                </div>
+                <div class="col-md-6">
+                        <div class="mb-3">
+                                <label for="weight" class="form-label"> </label>
+                                <input type="Number" class="form-control inches" name="inches" placeholder="inches" min="0" max="11">
+                        </div>
+                </div>
+        </div>
+        <button class="btn btn-primary">Lets Do This</button>
+      </form>
+
+
+
+
+
+
+<%- include('footer.ejs') %>
