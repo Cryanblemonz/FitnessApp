@@ -1,11 +1,11 @@
 body{
         background-color: black;
-        color: white;
-        margin: 2%;
+        color: white;   
 }
 
 .newUserForm{
         width: 70%;
+        padding: 2%;
 }
 
 .pw-warning{
@@ -15,4 +15,24 @@ body{
 
 .inches{
         margin-top: 8px;
+}
+
+.signin-form{
+        text-align: center;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10%;
+}
+
+#return-to-signup{
+        font-size: 10px;
+}
+
+.btn-light{
+        margin-top: 10px;
+}
+
+.navbar{
+        margin: 0;
 }

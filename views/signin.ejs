@@ -1,0 +1,22 @@
+<%- include('header') %>
+
+
+<form class="signin-form" action="/signIn" method="post">
+        <h1>Sign In</h1>
+        <div class="mb-3">
+                <label for="userName" class="form-label">Username</label>
+                <input type="Text" class="form-control" name="userName" placeholder="eg: HotDad419-68">
+        </div>
+        <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password">
+        </div>
+        <button class="btn btn-primary signin-button" type="submit">Sign In</button>
+</form>
+
+<a href="/signup"><button class="btn btn-light" id="return-to-signup">Return to signup</button></a>
+
+
+
+
+<%- include('footer') %>
