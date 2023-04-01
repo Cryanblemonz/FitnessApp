@@ -1,21 +1,21 @@
 body{
-        background-color: black;
-        color: white;   
+        background-color: white;
+        color: black;   
 }
+
+/* Signup */
 
 .newUserForm{
         width: 70%;
         padding: 2%;
 }
 
-.pw-warning{
-        font-size: 8px;
-        color: yellow;
-}
-
 .inches{
         margin-top: 8px;
 }
+
+
+/* Signin */
 
 .signin-form{
         text-align: center;
@@ -33,6 +33,81 @@ body{
         margin-top: 10px;
 }
 
+/* Navbar */
+
 .navbar{
         margin: 0;
+        background-color: rgb(30, 35, 37)!important;     
+}
+
+.navbar a{
+        color: whitesmoke!important;  
+}
+
+
+/* Homescreen */
+h1{
+        font-family: 'Zilla Slab', serif;
+        font-size: 3rem;
+        font-weight: 900;
+}
+
+#dashboard{
+        position: relative;
+}
+
+.dash-headings{
+        padding: 5% 0 0 10%;
+}
+
+#saved-workouts{
+        
+        width: 320px;
+        height: 100vh;
+        border: 2px solid black;
+        border-style: hidden solid hidden solid;
+        display: inline-block;
+        background-color: rgb(53, 48, 48);
+        overflow-y: scroll;
+        color: white;
+}
+
+.toggle-button{
+        display: inline;
+        z-index: 1;
+        border: 1px solid black;
+        position: absolute;
+        right: 0;
+}
+
+.right{
+        right: 0;
+}
+.collapsed{
+        display: none!important;
+}
+
+#saved-workouts h3{
+        text-align: center;
+        padding-top: 10px;      
+}
+
+hr{
+        width: 30%;
+        border-style: dotted none none none;
+        border-width: 6px;
+        margin: 20px auto;
+}
+
+.dashboard-workout{
+        text-align: center;
+}
+
+h4{
+        margin-left: 15px;
+        padding-top: 0;
+}
+
+.exercise-list{
+        text-align: left;
 }

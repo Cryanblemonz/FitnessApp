@@ -65,6 +65,8 @@ app.get("/home", function(req, res){
         res.render('home');
 })
 
+
+
 app.post("/newUser", function(req, res){
         const firstName = req.body.firstName;
         const lastName = req.body.lastName;
@@ -103,12 +105,13 @@ app.post("/signin", function(req, res){
         user.findOne({userName: userName})
         .then(foundUser => {
                 const foundPassword = foundUser.userPassword;
-                console.log(foundPassword)
+                const firstName = foundUser.firstName;
                 bcrypt.compare(password, foundPassword, function(err, result){
                         if(err){
                                 console.log(err)
                         } else if (result){
                                 console.log('Success')
+                                res.render('home', {firstName: firstName})
                         } else {
                                 console.log('incorrect password')
                         }
