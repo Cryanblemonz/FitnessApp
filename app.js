@@ -1,10 +1,10 @@
+// require variables
 const express = require("express");
 const mongoose = require("mongoose");
 const _ = require("lodash");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-
-
+const session = require('express-session');
 
 const app = express();
 
@@ -13,6 +13,14 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+// express-session setup
+app.use(session({
+        secret: 'test',
+        resave: false,
+        saveUninitialized: false
+}));
+
+// mongo connection
 mongoose.connect("mongodb://127.0.0.1/fitnessDB");
 
 const userSchema = mongoose.Schema({
@@ -47,11 +55,23 @@ const userSchema = mongoose.Schema({
         userPassword: {
                 type: String,
                 required: true
+        },
+        waterGoal: {
+                type: Number
+        },
+        exerciseGoal: {
+                type: Number
+        },
+        calorieGoal: {
+                type: Number
         }
 
 })      
 
 const user = mongoose.model("user", userSchema);
+
+
+// app.gets
 
 app.get("/signup", function (req, res) {
         res.render('signup');
@@ -62,10 +82,60 @@ app.get("/signin", function(req, res){
 })
 
 app.get("/home", function(req, res){
-        res.render('home');
+        if (!req.session.isLoggedIn) {
+                res.redirect('/signin');
+                return;
+        }
+        const hour = new Date().getHours();
+        let timeGreeting
+        if(hour < 5 || hour > 17){
+                timeGreeting = "Good Evening, "
+        } else if (hour > 5 && hour < 12){
+                timeGreeting = "Good Morning, "
+        } else {
+                timeGreeting = "Good Afternoon, "
+        }
+        res.render('home', {firstName: req.session.firstName, timeGreeting: timeGreeting})
 })
 
+app.get("/setup", function(req, res){
+        if (!req.session.isLoggedIn) {
+                res.redirect('/signin');
+                return;
+        }
+        user.findOne({userName: req.session.userName})
+                .then(foundUser => {
+                        req.session.sex = foundUser.sex
+                        console.log(req.session.sex);
+                        if (req.session.sex == "male") {
+                                user.findOneAndUpdate({ userName: req.session.userName }, { waterGoal: 124 })
+                                  .then(() => {
+                                    foundUser.waterGoal = 124;
+                                    foundUser.save();
+                                    let waterGoal = foundUser.waterGoal;
+                                    res.render('setup', { firstName: req.session.firstName, waterGoal: waterGoal });
+                                    console.log(waterGoal);
+                                  })
+                                  .catch((err) => {
+                                    console.log(err);
+                                  });
+                              } else if (req.session.sex == "female") {
+                                user.findOneAndUpdate({ userName: req.session.userName }, { waterGoal: 92 })
+                                  .then(() => {
+                                    foundUser.waterGoal = 92;
+                                    foundUser.save();
+                                    let waterGoal = foundUser.waterGoal;
+                                    res.render('setup', { firstName: req.session.firstName, waterGoal: waterGoal });
+                                    console.log(waterGoal);
+                                  })
+                                  .catch((err) => {
+                                    console.log(err);
+                                  });
+                              }
+                              })
+                        })
 
+// app.posts
 
 app.post("/newUser", function(req, res){
         const firstName = req.body.firstName;
@@ -100,32 +170,25 @@ app.post("/newUser", function(req, res){
 });
 
 app.post("/signin", function(req, res){
+
         const userName = req.body.userName;
         const password = req.body.password;
         user.findOne({userName: userName})
         .then(foundUser => {
+                req.session.userName = foundUser.userName;
+                req.session.isLoggedIn = true;
+                req.session.firstName = foundUser.firstName;
                 const foundPassword = foundUser.userPassword;
-                const firstName = foundUser.firstName;
 
                 bcrypt.compare(password, foundPassword, function(err, result){
                         if(err){
                                 console.log(err)
                         } else if (result){
                                 console.log('Success')
-                                const hour = new Date().getHours();
-                                if(hour < 5 || hour > 17){
-                                        const timeGreeting = "Good Evening, "
-                                        res.render('home', {firstName: firstName, timeGreeting: timeGreeting})
-                                } else if (hour > 5 && hour < 12){
-                                        const timeGreeting = "Good Morning, "
-                                        res.render('home', {firstName: firstName, timeGreeting: timeGreeting})
-                                } else {
-                                        const timeGreeting = "Good Afternoon, "
-                                        res.render('home', {firstName: firstName, timeGreeting: timeGreeting})
-                                }
-
+                                res.redirect("/home")
                         } else {
                                 console.log('incorrect password')
+                                res.redirect("/signin")
                         }
                 })
 
@@ -133,6 +196,8 @@ app.post("/signin", function(req, res){
 })
 
 
+
+// connect to host
 
 app.listen(3000, function (req, res) {
     console.log("server is running on port 3000");
