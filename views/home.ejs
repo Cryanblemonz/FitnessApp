@@ -3,14 +3,35 @@
 
 
 <div class="row">
-        <div class="col-lg-9" id="dashboard">
-                        <div class="dash-headings">
-                                <h1> Hello, <%=firstName%></h1>
-                                <h2>Let's do this.</h2>
+        <!-- Main Dashboard Section -->
+        <div class="col-lg-9 col-sm-12" id="dashboard">
+                <button class="toggle-button btn btn-light d-none d-lg-block">></button>
+                <div class="dash-headings">
+                        <h1><%=timeGreeting %><%=firstName%></h1>
+                        <h2>Let's do this.</h2>
+                </div>
+
+        <!-- Donut Charts -->
+
+        <div class="goals">
+                <h2>Your goals</h2>
+                <div class="row">
+                        <div class="col-lg-4">
+                                <canvas id="waterchart" class="donut" width="250" height="250"></canvas>
                         </div>
-                        <button class="toggle-button btn btn-light">></button>
+                        <div class="col-lg-4">
+                                <canvas id="echart" class="donut" width="250" height="250"></canvas>
+                            </div>
+                        <div class="col-lg-4">
+                                <canvas id="foodchart" class="donut" width="250" height="250"></canvas>
+                        </div>
+                </div>
         </div>
-        <div class="col-lg-3 col-md-12" id="saved-workouts">
+
+
+
+        </div>
+        <div class="col-lg-3 d-none d-lg-block" id="saved-workouts">
                 <h3> Your Workouts</h3>
                 <hr>
                 <div class="dashboard-workout">
@@ -59,7 +80,9 @@
                                 <li>Incline Treadmill</li>
                         </ul>
                         <button class="btn btn-dark">Start Workout</button>
+                        <hr>
                 </div>
+                <button class="btn btn-primary">Create New Workout</button>
         </div>
 </div>
                 

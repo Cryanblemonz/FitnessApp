@@ -106,12 +106,24 @@ app.post("/signin", function(req, res){
         .then(foundUser => {
                 const foundPassword = foundUser.userPassword;
                 const firstName = foundUser.firstName;
+
                 bcrypt.compare(password, foundPassword, function(err, result){
                         if(err){
                                 console.log(err)
                         } else if (result){
                                 console.log('Success')
-                                res.render('home', {firstName: firstName})
+                                const hour = new Date().getHours();
+                                if(hour < 5 || hour > 17){
+                                        const timeGreeting = "Good Evening, "
+                                        res.render('home', {firstName: firstName, timeGreeting: timeGreeting})
+                                } else if (hour > 5 && hour < 12){
+                                        const timeGreeting = "Good Morning, "
+                                        res.render('home', {firstName: firstName, timeGreeting: timeGreeting})
+                                } else {
+                                        const timeGreeting = "Good Afternoon, "
+                                        res.render('home', {firstName: firstName, timeGreeting: timeGreeting})
+                                }
+
                         } else {
                                 console.log('incorrect password')
                         }
