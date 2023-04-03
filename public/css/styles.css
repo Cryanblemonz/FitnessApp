@@ -45,7 +45,6 @@ h2{
 .navbar{
         margin: 0;
         padding: 0;
-        /* background-color: rgb(30, 35, 37)!important;      */
 }
 
 .navbar a{
@@ -73,7 +72,7 @@ h1{
 }
 
 .page-headings{
-        padding: 5% 0 0 10%;
+        padding: 3% 0 0 5%;
 }
 
 #saved-workouts{
@@ -100,8 +99,19 @@ h1{
 }
 
 .goals{
-        margin: 75px 100px;
+        margin: 75px 50px;
         text-align: center;
+}
+
+.donut{
+        margin: 20px auto;      
+}
+
+.goals h2{
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+        word-wrap: normal;
 }
 
 .collapsedd{
@@ -136,4 +146,33 @@ h4{
 
 .exercise-list{
         text-align: left;
+}
+
+/* Goals Page */
+
+#water-goal{
+        background: rgb(0,255,234);
+        background: linear-gradient(175deg, rgba(0,255,234,1) 26%, rgba(255,230,175,1) 74%);
+        border-radius: 1%;
+        border: 1px solid black;
+        padding: 2% 0 2% 5%;
+        margin-bottom: 1%;
+}
+
+#exercise-goal{
+        background: rgb(255,179,0);
+        background: linear-gradient(175deg, rgba(255,179,0,1) 26%, rgba(173,173,173,1) 74%);
+        border-radius: 1%;
+        border: 1px solid black;
+        padding: 2% 0 2% 5%;
+        margin-bottom: 1%;
+}
+
+#calorie-goal{
+        background: rgb(255,179,0);
+        background: linear-gradient(175deg, rgba(255,179,0,1) 26%, rgba(173,173,173,1) 74%);
+        border-radius: 1%;
+        border: 1px solid black;
+        padding: 2% 0 2% 5%;
+        margin-bottom: 1%;
 }

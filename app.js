@@ -110,22 +110,27 @@ app.get("/setup", function(req, res){
                         if (req.session.sex == "male") {
                                 user.findOneAndUpdate({ userName: req.session.userName }, { waterGoal: 124 })
                                   .then(() => {
-                                    foundUser.waterGoal = 124;
-                                    foundUser.save();
+                                    foundUser.waterGoal = 125;
+                                        if (!foundUser.calorieGoal){
+                                                foundUser.calorieGoal = (66.47 + (6.24 * foundUser.weight) + (12.7 * foundUser.height) - (6.755 * foundUser.age)) * 1.4;
+                                        // BMR = 66.47 + ( 6.24 × weight in pounds ) + ( 12.7 × height in inches ) − ( 6.755 × age in years ); PAL (light exercise) = 1.4
+                                         foundUser.save();
+                                        }
+                                        let calorieGoal = Math.round(foundUser.calorieGoal);
                                     let waterGoal = foundUser.waterGoal;
-                                    res.render('setup', { firstName: req.session.firstName, waterGoal: waterGoal });
-                                    console.log(waterGoal);
+                                    foundUser.save();
+                                    res.render('setup', { firstName: req.session.firstName, waterGoal: waterGoal, exerciseGoal: 30, calorieGoal: calorieGoal});
                                   })
                                   .catch((err) => {
                                     console.log(err);
                                   });
                               } else if (req.session.sex == "female") {
-                                user.findOneAndUpdate({ userName: req.session.userName }, { waterGoal: 92 })
+                                user.findOneAndUpdate({ userName: req.session.userName }, { waterGoal: 91 })
                                   .then(() => {
-                                    foundUser.waterGoal = 92;
+                                    foundUser.waterGoal = 91;
                                     foundUser.save();
                                     let waterGoal = foundUser.waterGoal;
-                                    res.render('setup', { firstName: req.session.firstName, waterGoal: waterGoal });
+                                    res.render('setup', { firstName: req.session.firstName, waterGoal: waterGoal, exerciseGoal: "30"});
                                     console.log(waterGoal);
                                   })
                                   .catch((err) => {
