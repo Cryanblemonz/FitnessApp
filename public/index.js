@@ -11,7 +11,15 @@ toggleButton.addEventListener("click", function () {
         : ">";
 });
 
-const waterGoal = 128;
+fetch('/api/goalVariables/waterVariable/exerciseVariable/calorieVariable')
+  .then(response => response.json())
+  .then(data => {
+    const waterVariable = data.waterVariable;
+    const exerciseVariable = data.exerciseVariable;
+    const calorieVariable = data.calorieVariable;
+
+
+const waterGoal = waterVariable;
 const waterDrank = 32;
 const waterLeft = waterGoal - waterDrank;
 
@@ -38,8 +46,8 @@ var waterChart = new Chart(cw, {
         }
 });
 
-const exerciseGoal = 300;
-const exerciseDone = 100;
+const exerciseGoal = exerciseVariable;
+const exerciseDone = 20;
 const exerciseLeft = exerciseGoal - exerciseDone;
 
 let ce = document.getElementById("echart").getContext("2d");
@@ -65,7 +73,7 @@ var exerciseChart = new Chart(ce, {
         }
 });
 
-const calorieGoal = 2000;
+const calorieGoal = Math.round(calorieVariable);
 const calorieDone = 1600;
 const calorieLeft = calorieGoal - calorieDone;
 
@@ -91,4 +99,4 @@ var calorieChart = new Chart(cc, {
             duration: 70000,
         }
 });
-
+})

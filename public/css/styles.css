@@ -169,8 +169,8 @@ h4{
 }
 
 #calorie-goal{
-        background: rgb(255,179,0);
-        background: linear-gradient(175deg, rgba(255,179,0,1) 26%, rgba(173,173,173,1) 74%);
+        background: rgb(55,198,19);
+        background: linear-gradient(175deg, rgba(55,198,19,1) 26%, rgba(173,173,173,1) 74%);
         border-radius: 1%;
         border: 1px solid black;
         padding: 2% 0 2% 5%;
