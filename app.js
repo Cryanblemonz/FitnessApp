@@ -106,59 +106,14 @@ app.get("/setup", function (req, res) {
     if (!req.session.isLoggedIn) {
         res.redirect("/signin");
         return;
+    } else {
+        res.render("setup", {
+            firstName: req.session.firstName,
+            waterGoal: req.session.waterGoal,
+            exerciseGoal: req.session.exerciseGoal,
+            calorieGoal: Math.round(req.session.calorieGoal),
+        });
     }
-    user.findOne({ userName: req.session.userName }).then((foundUser) => {
-        req.session.sex = foundUser.sex;
-        // male algorithms
-        if (req.session.sex == "male") {
-            user.findOne(
-                { userName: req.session.userName })
-                .then(() => {
-                    foundUser.waterGoal = 125;
-                    if (!foundUser.calorieGoal) {
-                        foundUser.calorieGoal =
-                            (66.47 + 6.24 * foundUser.weight + 12.7 * foundUser.height - 6.755 * foundUser.age) * 1.4;
-                        // BMR = 66.47 + ( 6.24 × weight in pounds ) + ( 12.7 × height in inches ) − ( 6.755 × age in years ); PAL (light exercise) = 1.4
-                        foundUser.save();
-                    }
-                    let calorieGoal = Math.round(foundUser.calorieGoal);
-                    let waterGoal = foundUser.waterGoal;
-                    res.render("setup", {
-                        firstName: req.session.firstName,
-                        waterGoal: waterGoal,
-                        exerciseGoal: req.session.exerciseGoal,
-                        calorieGoal: calorieGoal,
-                    });
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-                // female algorithms
-        } else if (req.session.sex == "female") {
-            user.findOne(
-                { userName: req.session.userName })
-                .then(() => {
-                    foundUser.waterGoal = 91;
-                    if (!foundUser.calorieGoal) {
-                        foundUser.calorieGoal =
-                            (655.1 + 4.35 * foundUser.weight + 4.7 * foundUser.height - 4.7 * foundUser.age) * 1.4;
-                        // BMR = 655.1 + ( 4.35 × weight in pounds ) + ( 4.7 × height in inches ) − ( 4.7 × age in years )
-                        foundUser.save();
-                    }
-                    let calorieGoal = Math.round(foundUser.calorieGoal);
-                    let waterGoal = foundUser.waterGoal;
-                    res.render("setup", {
-                        firstName: req.session.firstName,
-                        waterGoal: waterGoal,
-                        exerciseGoal: req.session.exerciseGoal,
-                        calorieGoal: calorieGoal,
-                    });
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        }
-    });
 });
 
 // app.posts
@@ -175,6 +130,7 @@ app.post("/newUser", function (req, res) {
     const height = Number(feet * 12 + inches);
     const userPassword = req.body.password;
     const exerciseGoal = 30;
+
     bcrypt.hash(userPassword, saltRounds, function (err, hash) {
         if (err) {
             console.log(err);
@@ -192,6 +148,27 @@ app.post("/newUser", function (req, res) {
                 exerciseGoal: exerciseGoal,
             });
             newUser.save();
+            user.findOne({ userName: userName }).then((foundUser) => {
+                if (foundUser.sex == "male") {
+                    foundUser.waterGoal = 125;
+                    foundUser.calorieGoal =
+                        (66.47 +
+                            6.24 * foundUser.weight +
+                            12.7 * foundUser.height -
+                            6.755 * foundUser.age) *
+                        1.4;
+                    foundUser.save();
+                } else if (foundUser.sex == "female") {
+                    foundUser.waterGoal = 91;
+                    foundUser.calorieGoal =
+                        (655.1 +
+                            4.35 * foundUser.weight +
+                            4.7 * foundUser.height -
+                            4.7 * foundUser.age) *
+                        1.4;
+                    foundUser.save();
+                }
+            });
             res.render("signin");
         }
     });
@@ -208,8 +185,7 @@ app.post("/signin", function (req, res) {
         req.session.calorieGoal = foundUser.calorieGoal;
         req.session.exerciseGoal = foundUser.exerciseGoal;
         req.session.waterGoal = foundUser.waterGoal;
-
-        
+        req.session.sex = foundUser.sex;
 
         const foundPassword = foundUser.userPassword;
 
@@ -217,9 +193,7 @@ app.post("/signin", function (req, res) {
             if (err) {
                 console.log(err);
             } else if (result) {
-                console.log("Success");
                 res.redirect("/home");
-                console.log(req.session.waterGoal);
             } else {
                 console.log("incorrect password");
                 res.redirect("/signin");
@@ -255,4 +229,3 @@ app.get(
 app.listen(3000, function (req, res) {
     console.log("server is running on port 3000");
 });
-
