@@ -18,12 +18,12 @@
         <div class="goal-div">
                 <h2>Exercise</h2>
                 <p>Based on general guidance, your exercise goal should be:</p> <h5><u><b><%=exerciseGoal%> minutes per day</b></u></h5> <p>(On average; 5 days per week).</p>
-                <p>Exercising for 150 minutes a week may sound like a daunting task, but it's actually one of the best things you can do for your health! Not only does it help you maintain a healthy weight, but it also reduces your risk of chronic diseases like heart disease, type 2 diabetes, and certain types of cancer. Plus, it's a great way to boost your mood and relieve stress. So, whether you prefer jogging, dancing, or taking a leisurely stroll, make sure to get those 150 minutes in! Don't just take my word for it - the Centers for Disease Control and Prevention (CDC) recommends at least 150 minutes of moderate-intensity aerobic activity per week for adults. This reccomendation is based on general guidance and you should always consult with a licensed physician before beginning any exercise routine. Lets do this.</p>
+                <p>Exercising for 150 minutes a week may sound like a daunting task, but it's actually one of the best things you can do for your health! Not only does it help you maintain a healthy weight, but it also reduces your risk of chronic diseases like heart disease, type 2 diabetes, and certain types of cancer. Plus, it's a great way to boost your mood and relieve stress. So, whether you prefer jogging, dancing, or taking a leisurely stroll, make sure to get those 150 minutes in! Don't just take my word for it - the Centers for Disease Control and Prevention (CDC) recommends at least 150 minutes of moderate-intensity aerobic activity per week for adults. This recommendation is based on general guidance and you should always consult with a licensed physician before beginning any exercise routine. Lets do this.</p>
                 <button class="btn btn-dark">Change my exercise goal</button>
         </div>
 </section>
 <section id="calorie-goal">
-        <div class="goal-div">
+        <div class="goal-div">                  
                 <h2>Calorie Intake</h2>
                 <p>Based on your info, your calorie-intake should be:</p> <h5><u><b><%=calorieGoal%> calories per day</b></u></h5> <p>(On average — 5 days per week).</p>
                 <p>By default, this number starts as your Total Daily Energy Expenditure (TDEE). This the <em>estimated</em> number of calories you would need to eat to maintain your current body weight, assuming you participate in light exercise 1-2 days per week. This number is calculated using generlized factors, such as your height, weight, and sex. Of course, this number will be different for everyone dependent on factors including your physical activity level, muscle mass, and metabolism. If your intentions are to lose or gain weight, we can adjust this goal accordingly. For a more personalized calorie goal, press the button below and tell us more about yourself and your goals. </p>
@@ -31,7 +31,22 @@
                         <button class="btn btn-light" id="changeCaloriesShow">Change my calorie goal</button>
 
                         <div id="changeCalories" class="collapsedd">
-                                <button>working</button>
+                                <div class="row">
+                                        <div class="col-lg-4 center">
+                                                <p>Answer a few questions to calculate a personalized goal.</p>
+                                                <button class="btn btn-primary changeButton">BET</button>
+                                        </div>
+                                        <div class="col-lg-2 center">
+                                                <p>Or...</p>
+                                        </div>
+                                        <div class="col-lg-4 center">
+                                                <p>Set your goal manually.</p>
+                                                <form action="/calChange" method="post">
+                                                        <input type="text" class="form-control changeInput" name="calChange">
+                                                        <button class="btn btn-primary changeButton" type="submit">Set my Goal</button>
+                                                </form>
+                                        </div>
+                                </div>
                         </div>
         </div>
 </section>

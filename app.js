@@ -101,7 +101,6 @@ app.get("/home", function (req, res) {
     });
 });
 
-
 // Display and personalize water, calorie, and exercise goals
 app.get("/setup", function (req, res) {
     if (!req.session.isLoggedIn) {
@@ -110,7 +109,6 @@ app.get("/setup", function (req, res) {
     }
     user.findOne({ userName: req.session.userName }).then((foundUser) => {
         req.session.sex = foundUser.sex;
-        console.log(req.session.sex);
         // male algorithms
         if (req.session.sex == "male") {
             user.findOne(
@@ -210,6 +208,8 @@ app.post("/signin", function (req, res) {
         req.session.calorieGoal = foundUser.calorieGoal;
         req.session.exerciseGoal = foundUser.exerciseGoal;
         req.session.waterGoal = foundUser.waterGoal;
+
+        
 
         const foundPassword = foundUser.userPassword;
 
