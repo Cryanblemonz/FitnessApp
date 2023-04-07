@@ -1,8 +1,12 @@
 body{
-        background-color: white;
+        background-color: rgb(252, 248, 248);
         color: black;   
         margin: 0;
         font-family: montserrat;
+}
+
+.btn-light{
+        border: 1px solid black;
 }
 
 h2{
@@ -18,7 +22,7 @@ h2{
 
 .newUserForm{
         width: 70%;
-        padding: 2%;
+        padding: 3% 0 0 5%;
 }
 
 .inches{
@@ -38,10 +42,6 @@ h2{
 
 #return-to-signup{
         font-size: 10px;
-}
-
-.btn-light{
-        margin-top: 10px;
 }
 
 /* Navbar */
@@ -80,7 +80,7 @@ h1{
 }
 
 #saved-workouts{
-        height: 100vh;
+        height: 120vh;
         border: 2px solid black;
         border-style: hidden solid hidden solid;
         background-color: rgb(53, 48, 48);
@@ -103,7 +103,7 @@ h1{
 }
 
 .goals{
-        margin: 75px 50px;
+        margin: 30px 50px;
         text-align: center;
 }
 
@@ -118,7 +118,7 @@ h1{
         word-wrap: normal;
 }
 
-.collapsedd{
+.collapsedDiv{
         display: none!important;
 }
 
@@ -185,9 +185,10 @@ h4{
         padding: 3px;
 }
 
-#changeCalories{
+#changeCalories, #changeExercise, #changeWater{
         padding-top: 20px;
         font-weight: 700;
+        text-align: center;
 }
 
 .changeButton{
@@ -195,8 +196,13 @@ h4{
         margin: 20px;
 }
 
-.changeInput{
+.changeInputDual{
         width: 50%;
         margin-left: auto;
         margin-right: auto;
+}
+
+.qButton{
+        margin-top: 20px;
+        width: auto;
 }

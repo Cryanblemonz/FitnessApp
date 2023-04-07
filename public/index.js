@@ -5,10 +5,10 @@ document.addEventListener("DOMContentLoaded", function() {
   
 
   toggleButton.addEventListener("click", function () {
-      workouts.classList.toggle("collapsedd");
+      workouts.classList.toggle("collapsedDiv");
       dashboard.classList.toggle("col-lg-9");
       dashboard.classList.toggle("col-lg-12");
-      toggleButton.textContent = workouts.classList.contains("collapsedd")
+      toggleButton.textContent = workouts.classList.contains("collapsedDiv")
           ? "<"
           : ">";
   });
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
   
   const exerciseGoal = exerciseVariable;
-  const exerciseDone = 20;
+  const exerciseDone = 70;
   const exerciseLeft = exerciseGoal - exerciseDone;
   
   let ce = document.getElementById("echart").getContext("2d");
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
               {
                   label: "Exercise Goal",
                   data: [exerciseDone, exerciseLeft],
-                  backgroundColor: ["red", "gray"],
+                  backgroundColor: ['rgb(255,179,0)', "gray"],
                   borderColor: ["black", "black"],
                   borderWidth: 1,
               },
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
   
   const calorieGoal = Math.round(calorieVariable);
-  const calorieDone = 1600;
+  const calorieDone = 400;
   const calorieLeft = calorieGoal - calorieDone;
   
   let cc = document.getElementById("foodchart").getContext("2d");

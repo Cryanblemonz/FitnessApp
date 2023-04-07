@@ -1,0 +1,35 @@
+<%- include('header') %>
+<%- include('navbar') %>
+
+<div class="page-headings">
+        <h1>Let's set a personalized calorie goal, <%=firstName%></h1>
+</div>
+
+<form class="newUserForm" action="/customCals" method="post">
+        <label for="activityLevel" class="form-label">What best describes your current activity level?</label>
+        <select class="form-control" name="activityLevel">
+                <option></option>
+                <option value="lvl0">Sedentary</option>
+                <option value="lvl1">Light Exercise (1-2 days per week)</option>
+                <option value="lvl2">Moderate Exercise (3-5 days per week)</option>
+                <option value="lvl3">Heavy Exercise (6-7 days per week))</option>
+                <option value="lvl4">Athlete (2+ times per day)</option>
+        </select>
+
+<label for="goal" class="form-label">What is your primary goal relating to your weight?</label>
+        <select class="form-control" name="goal">
+                <option></option>
+                <option value="lose2">Lose 2 lbs per week</option>
+                <option value="lose1">Lose 1 lb per week</option>
+                <option value="lose.5">Lose .5 lbs per week</option>
+                <option value="maintain">Maintain my Current Weight</option>
+                <option value="gain.5">Gain .5 lbs per week</option>
+                <option value="gain1">Gain 1 lb per week</option>                       
+                <option value="gain2">Gain 2 lbs per week</option>
+        </select>
+        <button class="btn btn-primary qButton" type="submit">Set my new calorie goal</button>
+</form>
+
+
+
+<%- include('footer') %>

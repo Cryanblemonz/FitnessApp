@@ -25,6 +25,22 @@ app.use(
 // mongo connection
 mongoose.connect("mongodb://127.0.0.1/fitnessDB");
 
+
+const daySchema = mongoose.Schema({
+        waterProgress: {
+                type: Number
+        },
+        exerciseProgress:{
+                type: Number
+        },
+        calorieProgress: {
+                type: Number
+        }
+})
+
+const day = mongoose.model("day", daySchema);
+
+// UserSchema
 const userSchema = mongoose.Schema({
     firstName: {
         type: String,
@@ -67,9 +83,15 @@ const userSchema = mongoose.Schema({
     calorieGoal: {
         type: Number,
     },
+    days: {
+        type: daySchema
+    }
 });
-
+// User Model
 const user = mongoose.model("user", userSchema);
+
+
+
 
 // app.gets
 
@@ -115,6 +137,12 @@ app.get("/setup", function (req, res) {
         });
     }
 });
+
+app.get("/calorieQuestions", function(req, res){
+        res.render('calorieQuestions', {
+                firstName: req.session.firstName
+        })
+})
 
 // app.posts
 
@@ -201,6 +229,118 @@ app.post("/signin", function (req, res) {
         });
     });
 });
+
+// Change Water Goal Manually
+app.post("/waterChange", function(req,res){
+        user.findOne({userName: req.session.userName})
+        .then(foundUser => {
+                let newGoal = req.body.waterChange;
+                foundUser.waterGoal = newGoal;
+                foundUser.save();
+                req.session.waterGoal = foundUser.waterGoal;
+                res.redirect("/setup");
+        });
+});
+
+// Change Exercise Goal Manually
+app.post("/exerciseChange", function(req,res){
+        user.findOne({userName: req.session.userName})
+        .then(foundUser => {
+                let newGoal = req.body.exerciseChange;
+                foundUser.exerciseGoal = newGoal;
+                foundUser.save();
+                req.session.exerciseGoal = foundUser.exerciseGoal;
+                res.redirect("/setup");
+        });
+});
+
+
+// Change Calories Goal Manually
+app.post("/calChange", function(req,res){
+        user.findOne({userName: req.session.userName})
+        .then(foundUser => {
+                let newGoal = req.body.calChange;
+                foundUser.calorieGoal = newGoal;
+                foundUser.save();
+                req.session.calorieGoal = foundUser.calorieGoal;
+                res.redirect("/setup");
+        });
+});
+
+// Change Calories Goal W/ Question Form
+app.post("/customCals", function(req,res){
+        let activityLevel;
+        let goal;
+
+        switch(req.body.activityLevel) {
+                case "lvl0":
+                        activityLevel = 1.2;
+                        break;
+                case "lvl1":
+                        activityLevel = 1.4;
+                        break;
+                case "lvl2":
+                        activityLevel = 1.55;
+                        break;
+                case "lvl3":
+                        activityLevel = 1.725;
+                        break;
+                case "lvl4":
+                        activityLevel = 1.9;
+                        break;
+                default:
+                        activityLevel = 1.4;
+        }               
+        switch(req.body.goal) {
+                case "lose2":
+                        goal = -1000;
+                        break;
+                case "lose1":
+                        goal = -500;
+                        break;
+                case "lose.5":
+                        goal = -250;
+                        break;
+                case "maintain":
+                        goal = 0;
+                        break;
+                case "gain.5":
+                        goal = 250;
+                        break;
+                case "gain1":
+                        goal = 500;
+                        break;
+                case "gain2":
+                        goal = 1000;
+                        break;
+                default:
+                        goal = 0;
+        }
+        user.findOne({userName: req.session.userName})
+        .then(foundUser => {
+                if(foundUser.sex == 'male'){
+                        foundUser.calorieGoal = 
+                        ((66.47 +
+                                6.24 * foundUser.weight +
+                                12.7 * foundUser.height -
+                                6.755 * foundUser.age) *
+                            activityLevel) + goal;
+                            foundUser.save();
+                            req.session.calorieGoal = foundUser.calorieGoal;
+                            res.redirect('/setup')
+                } else if (foundUser.sex == 'female'){
+                        foundUser.calorieGoal =
+                        ((655.1 +
+                                4.35 * foundUser.weight +
+                                4.7 * foundUser.height -
+                                4.7 * foundUser.age) *
+                            activityLevel) + goal;
+                            foundUser.save();
+                            req.session.calorieGoal = foundUser.calorieGoal;
+                            res.redirect('/setup')
+                }
+        })
+})
 
 // Signout Function
 app.post("/signout", function (req, res) {
