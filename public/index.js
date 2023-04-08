@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
   
   const exerciseGoal = exerciseVariable;
-  const exerciseDone = 70;
+  const exerciseDone = 10;
   const exerciseLeft = exerciseGoal - exerciseDone;
   
   let ce = document.getElementById("echart").getContext("2d");

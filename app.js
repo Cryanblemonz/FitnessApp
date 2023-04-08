@@ -174,9 +174,9 @@ app.post("/newUser", function (req, res) {
                 userPassword: hashedPassword,
                 exerciseGoal: exerciseGoal,
                 days: []
-            });
+            })
             newUser.save();
-            user.findOne({ userName: userName }).then((foundUser) => {
+            user.findOne({ userName: userName }).then(foundUser => {
                 if (foundUser.sex == "male") {
                     foundUser.waterGoal = 125;
                     foundUser.calorieGoal =
@@ -219,18 +219,34 @@ app.post("/signin", function (req, res) {
         req.session.exerciseGoal = foundUser.exerciseGoal;
         req.session.waterGoal = foundUser.waterGoal;
         req.session.sex = foundUser.sex;
-
+        req.session.day = formattedToday;
+        
         const foundPassword = foundUser.userPassword;
 
         bcrypt.compare(password, foundPassword, function (err, result) {
             if (err) {
                 console.log(err);
             } else if (result) {
-                let newDay = new day({
-                        date: formattedToday})
-                        foundUser.days.push(newDay);
-                        foundUser.save();
-                res.redirect("/home");
+                let newDayExists = false;
+                foundUser.days.forEach((day) => {
+                        if(day.date === formattedToday) {
+                                newDayExists = true;
+                                return;
+                        }
+                })
+                if (newDayExists){
+                        res.redirect("/home");
+                } else{
+                        let newDay = new day({
+                                date: formattedToday,
+                                waterProgress: 0,
+                                exerciseProgress: 0,
+                                calorieProgress: 0
+                        })
+                                foundUser.days.push(newDay);
+                                foundUser.save();
+                        res.redirect("/home");
+                }
             } else {
                 console.log("incorrect password");
                 res.redirect("/signin");
