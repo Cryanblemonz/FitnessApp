@@ -175,28 +175,30 @@ app.post("/newUser", function (req, res) {
                 exerciseGoal: exerciseGoal,
                 days: []
             })
-            newUser.save();
-            user.findOne({ userName: userName }).then(foundUser => {
-                if (foundUser.sex == "male") {
-                    foundUser.waterGoal = 125;
-                    foundUser.calorieGoal =
-                        (66.47 +
-                            6.24 * foundUser.weight +
-                            12.7 * foundUser.height -
-                            6.755 * foundUser.age) *
-                        1.4;
-                    foundUser.save();
-                } else if (foundUser.sex == "female") {
-                    foundUser.waterGoal = 91;
-                    foundUser.calorieGoal =
-                        (655.1 +
-                            4.35 * foundUser.weight +
-                            4.7 * foundUser.height -
-                            4.7 * foundUser.age) *
-                        1.4;
-                    foundUser.save();
-                }
-            });
+            newUser.save()
+            .then(() => {
+                user.findOne({ userName: userName }).then(foundUser => {
+                        if (foundUser.sex == "male") {
+                            foundUser.waterGoal = 125;
+                            foundUser.calorieGoal =
+                                (66.47 +
+                                    6.24 * foundUser.weight +
+                                    12.7 * foundUser.height -
+                                    6.755 * foundUser.age) *
+                                1.4;
+                            foundUser.save();
+                        } else if (foundUser.sex == "female") {
+                            foundUser.waterGoal = 91;
+                            foundUser.calorieGoal =
+                                (655.1 +
+                                    4.35 * foundUser.weight +
+                                    4.7 * foundUser.height -
+                                    4.7 * foundUser.age) *
+                                1.4;
+                            foundUser.save();
+                        }
+                    });
+            })
             res.render("signin");
         }
     });
@@ -219,8 +221,7 @@ app.post("/signin", function (req, res) {
         req.session.exerciseGoal = foundUser.exerciseGoal;
         req.session.waterGoal = foundUser.waterGoal;
         req.session.sex = foundUser.sex;
-        req.session.day = formattedToday;
-        
+
         const foundPassword = foundUser.userPassword;
 
         bcrypt.compare(password, foundPassword, function (err, result) {
@@ -235,25 +236,30 @@ app.post("/signin", function (req, res) {
                         }
                 })
                 if (newDayExists){
-                        res.redirect("/home");
+                                res.redirect("/home");
                 } else{
                         let newDay = new day({
                                 date: formattedToday,
-                                waterProgress: 0,
+                                waterProgress: 10,
                                 exerciseProgress: 0,
                                 calorieProgress: 0
                         })
                                 foundUser.days.push(newDay);
                                 foundUser.save();
-                        res.redirect("/home");
+                                res.redirect("/home");
                 }
             } else {
                 console.log("incorrect password");
                 res.redirect("/signin");
             }
         });
+        const today = foundUser.days.find((d) => d.date == formattedToday)
+        req.session.waterProgress = today.waterProgress;
+        req.session.exerciseProgress = today.exerciseProgress;
+        req.session.calorieProgress = today.calorieProgress;
     });
 });
+
 
 // Change Water Goal Manually
 app.post("/waterChange", function (req, res) {
@@ -382,11 +388,27 @@ app.get(
         exerciseVariable = req.session.exerciseGoal;
         calorieVariable = req.session.calorieGoal;
 
+
         res.json({ waterVariable, exerciseVariable, calorieVariable });
     }
 );
 
-// connect to host
+app.get(
+        "/api/goalProgress/:waterProgress/:exerciseProgress/:calorieProgress",
+        function(req,res){
+
+                let waterProgress = req.params.waterProgress;
+                let exerciseProgress = req.params.exerciseProgress;
+                let calorieProgress = req.params.calorieProgress;
+                
+                waterProgress = req.session.waterProgress;
+                exerciseProgress = req.session.exerciseProgress;
+                calorieProgress = req.session.calorieProgress;
+
+                res.json({ waterProgress, exerciseProgress, calorieProgress });        
+        }
+);
+
 
 app.listen(3000, function (req, res) {
     console.log("server is running on port 3000");
