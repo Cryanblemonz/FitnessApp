@@ -111,6 +111,27 @@ h1{
         margin: 20px auto;      
 }
 
+.log-button{
+        border-radius: 100%;
+        color: black;
+        font-weight: bolder;
+}
+
+.log-para{
+        padding: 5px 0;
+        margin: 0;
+        font-weight: 700;
+}
+
+.log-input{
+        width: 30%;
+        margin-left: auto;
+        margin-right: auto;
+        display: inline-block;
+        margin: 5px;
+        border: 1px solid black;
+}
+
 .goals h2{
         width: auto;
         margin-left: auto;
@@ -118,7 +139,7 @@ h1{
         word-wrap: normal;
 }
 
-.collapsedDiv{
+.collapsed-div{
         display: none!important;
 }
 

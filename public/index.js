@@ -5,10 +5,10 @@
     
 
     toggleButton.addEventListener("click", function () {
-        workouts.classList.toggle("collapsedDiv");
+        workouts.classList.toggle("collapsed-div");
         dashboard.classList.toggle("col-lg-9");
         dashboard.classList.toggle("col-lg-12");
-        toggleButton.textContent = workouts.classList.contains("collapsedDiv")
+        toggleButton.textContent = workouts.classList.contains("collapsed-div")
             ? "<"
             : ">";
     });

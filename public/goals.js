@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .addEventListener("click", function () {
             document
                 .querySelector("#changeCalories")
-                .classList.toggle("collapsedDiv");
+                .classList.toggle("collapsed-div");
         });
 });
 
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .addEventListener("click", function () {
             document
                 .querySelector("#changeExercise")
-                .classList.toggle("collapsedDiv");
+                .classList.toggle("collapsed-div");
         });
 });
 
@@ -24,6 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .addEventListener("click", function () {
           document
               .querySelector("#changeWater")
-              .classList.toggle("collapsedDiv");
+              .classList.toggle("collapsed-div");
       });
 });

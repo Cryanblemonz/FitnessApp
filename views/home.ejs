@@ -19,14 +19,39 @@
                         <div class="col-lg-4">
                                 <canvas id="waterchart" class="donut" width="250" height="250"></canvas>
                                 <button class="btn btn-primary">Log Water</button>
+
+                                <!-- <div id="addWater" class="collapsed-div"> -->
+                                <form action="addWater" method="post">
+                                        <p class="log-para">I drank </p>
+                                        <input class="form-control log-input" type="number" name="logWater">
+                                        <p class="log-para">ounces of water</p>
+                                        <button style="background-color: rgb(7, 255, 255);" class="btn btn-primary log-button">Log</button>
+                                </form> 
+                                <!-- </div> -->
                         </div>
                         <div class="col-lg-4">
                                 <canvas id="echart" class="donut" width="250" height="250"></canvas>
                                 <button class="btn btn-dark">Log Exercise</button>
+                                <!-- <div id="addWater" class="collapsed-div"> -->
+                                        <form action="addWater" method="post">
+                                                <p class="log-para">I did </p>
+                                                <input class="form-control log-input" type="number" name="logWater">
+                                                <p class="log-para">minutes of exercise</p>
+                                                <button style="background-color: rgb(73, 77, 77); color: white" class="btn btn-primary log-button">Log</button>
+                                        </form> 
+                                        <!-- </div> -->
                             </div>
                         <div class="col-lg-4">
                                 <canvas id="foodchart" class="donut" width="250" height="250"></canvas>
                                 <button class="btn btn-light">Log Calories</button>
+                                        <!-- <div id="addWater" class="collapsed-div"> -->
+                                                <form action="addWater" method="post">
+                                                        <p class="log-para">I Ate</p>
+                                                        <input class="form-control log-input" type="number" name="logWater">
+                                                        <p class="log-para">Calories</p>
+                                                        <button style="background-color: rgb(47, 240, 105);" class="btn btn-primary log-button">Log</button>
+                                                </form> 
+                                        <!-- </div> -->
                         </div>
                 </div>
         </div>
