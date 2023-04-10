@@ -221,6 +221,7 @@ app.post("/signin", function (req, res) {
         req.session.exerciseGoal = foundUser.exerciseGoal;
         req.session.waterGoal = foundUser.waterGoal;
         req.session.sex = foundUser.sex;
+        req.session.day = formattedToday;
 
         const foundPassword = foundUser.userPassword;
 
@@ -237,13 +238,14 @@ app.post("/signin", function (req, res) {
                 })
                 if (newDayExists){
                                 res.redirect("/home");
-                } else{
+                } else{ 
                         let newDay = new day({
                                 date: formattedToday,
                                 waterProgress: 10,
                                 exerciseProgress: 0,
                                 calorieProgress: 0
                         })
+                                console.log(newDay);
                                 foundUser.days.push(newDay);
                                 foundUser.save();
                                 res.redirect("/home");
@@ -253,12 +255,16 @@ app.post("/signin", function (req, res) {
                 res.redirect("/signin");
             }
         });
-        const today = foundUser.days.find((d) => d.date == formattedToday)
-        req.session.waterProgress = today.waterProgress;
-        req.session.exerciseProgress = today.exerciseProgress;
-        req.session.calorieProgress = today.calorieProgress;
+                const today = foundUser.days.find((d) => d.date == formattedToday)
+                if (today && today.waterProgress){
+                        req.session.waterProgress = today.waterProgress;
+                        req.session.exerciseProgress = today.exerciseProgress;
+                        req.session.calorieProgress = today.calorieProgress;
+                }
+        }
+        )
     });
-});
+
 
 
 // Change Water Goal Manually
@@ -369,6 +375,45 @@ app.post("/customCals", function (req, res) {
         }
     });
 });
+
+// Log Water
+app.post("/addWater", function(req, res){
+        user.findOne({userName: req.session.userName})
+        .then(foundUser => {
+                const today = foundUser.days.find((d) => d.date == req.session.day);
+                console.log(today, req.body.logWater, req.session.waterProgress, today.waterProgress);
+                today.waterProgress = req.session.waterProgress + Number(req.body.logWater);
+                foundUser.save();
+                req.session.waterProgress = today.waterProgress;
+                res.redirect("/home");
+        })
+})
+
+// Log Exercise
+app.post("/addExercise", function(req, res){
+        user.findOne({userName: req.session.userName})
+        .then(foundUser => {
+                const today = foundUser.days.find((d) => d.date == req.session.day);
+                console.log(today, req.body.logExercise, req.session.exerciseProgress, today.exerciseProgress);
+                today.exerciseProgress = req.session.exerciseProgress + Number(req.body.logExercise);
+                foundUser.save();
+                req.session.exerciseProgress = today.exerciseProgress;
+                res.redirect("/home");
+        })
+})
+
+// Log Water
+app.post("/addCalories", function(req, res){
+        user.findOne({userName: req.session.userName})
+        .then(foundUser => {
+                const today = foundUser.days.find((d) => d.date == req.session.day);
+                console.log(today, Number(req.body.logCalories), req.session.calorieProgress, today.calorieProgress);
+                today.calorieProgress = req.session.calorieProgress + Number(req.body.logCalories);
+                foundUser.save();
+                req.session.calorieProgress = today.calorieProgress;
+                res.redirect("/home");
+        })
+})
 
 // Signout Function
 app.post("/signout", function (req, res) {

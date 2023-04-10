@@ -18,40 +18,40 @@
                 <div class="row">
                         <div class="col-lg-4">
                                 <canvas id="waterchart" class="donut" width="250" height="250"></canvas>
-                                <button class="btn btn-primary">Log Water</button>
+                                <button id="showWaterLog" class="btn btn-primary">Log Water</button>
 
-                                <!-- <div id="addWater" class="collapsed-div"> -->
+                                <div id="addWater" class="collapsed-div">
                                 <form action="addWater" method="post">
                                         <p class="log-para">I drank </p>
                                         <input class="form-control log-input" type="number" name="logWater">
                                         <p class="log-para">ounces of water</p>
-                                        <button style="background-color: rgb(7, 255, 255);" class="btn btn-primary log-button">Log</button>
+                                        <button class="btn btn-primary log-button" type="submit">Log</button>
                                 </form> 
-                                <!-- </div> -->
+                                </div>
                         </div>
                         <div class="col-lg-4">
                                 <canvas id="echart" class="donut" width="250" height="250"></canvas>
-                                <button class="btn btn-dark">Log Exercise</button>
-                                <!-- <div id="addWater" class="collapsed-div"> -->
-                                        <form action="addWater" method="post">
+                                <button id="showExerciseLog" class="btn btn-dark">Log Exercise</button>
+                                <div id="addExercise" class="collapsed-div">
+                                        <form action="addExercise" method="post">
                                                 <p class="log-para">I did </p>
-                                                <input class="form-control log-input" type="number" name="logWater">
+                                                <input class="form-control log-input" type="number" name="logExercise">
                                                 <p class="log-para">minutes of exercise</p>
-                                                <button style="background-color: rgb(73, 77, 77); color: white" class="btn btn-primary log-button">Log</button>
+                                                <button class="btn btn-dark log-button">Log</button>
                                         </form> 
-                                        <!-- </div> -->
+                                        </div>
                             </div>
                         <div class="col-lg-4">
                                 <canvas id="foodchart" class="donut" width="250" height="250"></canvas>
-                                <button class="btn btn-light">Log Calories</button>
-                                        <!-- <div id="addWater" class="collapsed-div"> -->
-                                                <form action="addWater" method="post">
+                                <button id="showCalorieLog" class="btn btn-light">Log Calories</button>
+                                        <div id="addCalories" class="collapsed-div">
+                                                <form action="addCalories" method="post">
                                                         <p class="log-para">I Ate</p>
-                                                        <input class="form-control log-input" type="number" name="logWater">
+                                                        <input class="form-control log-input" type="number" name="logCalories">
                                                         <p class="log-para">Calories</p>
-                                                        <button style="background-color: rgb(47, 240, 105);" class="btn btn-primary log-button">Log</button>
+                                                        <button class="btn btn-light log-button">Log</button>
                                                 </form> 
-                                        <!-- </div> -->
+                                        </div>
                         </div>
                 </div>
         </div>

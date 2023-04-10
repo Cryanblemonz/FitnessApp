@@ -1,17 +1,40 @@
+
     document.addEventListener("DOMContentLoaded", function() {
     const toggleButton = document.querySelector(".toggle-button");
     const workouts = document.querySelector("#saved-workouts");
     const dashboard = document.querySelector("#dashboard");
-    
+    const waterButton = document.querySelector('#showWaterLog');
+    const exerciseButton = document.querySelector('#showExerciseLog');
+    const calorieButton = document.querySelector('#showCalorieLog');
+    const waterLog = document.querySelector("#addWater");
+    const exerciseLog = document.querySelector("#addExercise");
+    const calorieLog = document.querySelector("#addCalories");
+
+function toggleCollapse(collapsedDiv){
+    collapsedDiv.classList.toggle('collapsed-div');
+}
 
     toggleButton.addEventListener("click", function () {
-        workouts.classList.toggle("collapsed-div");
+        toggleCollapse(workouts);
         dashboard.classList.toggle("col-lg-9");
         dashboard.classList.toggle("col-lg-12");
         toggleButton.textContent = workouts.classList.contains("collapsed-div")
             ? "<"
             : ">";
     });
+
+    waterButton.addEventListener("click", function(){
+        toggleCollapse(waterLog);
+    });
+
+    exerciseButton.addEventListener("click", function(){
+        toggleCollapse(exerciseLog);
+    });
+
+    calorieButton.addEventListener("click", function(){
+        toggleCollapse(calorieLog);
+    });
+
     
     fetch('/api/goalVariables/waterVariable/exerciseVariable/calorieVariable')
         .then(response => response.json())

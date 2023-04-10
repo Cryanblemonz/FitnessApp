@@ -108,13 +108,11 @@ h1{
 }
 
 .donut{
-        margin: 20px auto;      
+        margin: 10px auto;      
 }
 
 .log-button{
         border-radius: 100%;
-        color: black;
-        font-weight: bolder;
 }
 
 .log-para{
