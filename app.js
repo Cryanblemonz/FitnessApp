@@ -143,6 +143,27 @@ app.get("/calorieQuestions", function (req, res) {
     });
 });
 
+app.get("/workouts", function(req,res){
+    const request = require('request');
+    var muscle = 'biceps';
+    request.get({
+      url: 'https://api.api-ninjas.com/v1/exercises?muscle=' + muscle,
+      headers: {
+        'X-Api-Key': "zGgdF2+Y4cdd1MJv0h/FCw==8bXrFC72ymStibRL"
+      },
+    }, function(error, response, body) {
+      if(error) return console.error('Request failed:', error);
+      else if(response.statusCode != 200) return console.error('Error:', response.statusCode, body.toString('utf8'));
+      else {
+        let data = JSON.parse(body)
+        let shownData = data[9].instructions;
+        console.log(data);
+        res.render('workouts', {shownData: shownData})
+    }
+    });
+})
+
+
 // app.posts
 
 app.post("/newUser", function (req, res) {
