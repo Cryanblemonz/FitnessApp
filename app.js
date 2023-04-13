@@ -143,26 +143,66 @@ app.get("/calorieQuestions", function (req, res) {
     });
 });
 
-app.get("/workouts", function(req,res){
-    const request = require('request');
-    var muscle = 'biceps';
-    request.get({
-      url: 'https://api.api-ninjas.com/v1/exercises?muscle=' + muscle,
-      headers: {
-        'X-Api-Key': "zGgdF2+Y4cdd1MJv0h/FCw==8bXrFC72ymStibRL"
-      },
-    }, function(error, response, body) {
-      if(error) return console.error('Request failed:', error);
-      else if(response.statusCode != 200) return console.error('Error:', response.statusCode, body.toString('utf8'));
-      else {
-        let data = JSON.parse(body)
-        let shownData = data[9].instructions;
-        console.log(data);
-        res.render('workouts', {shownData: shownData})
-    }
-    });
-})
+app.get("/workouts", function (req, res) {
+    const request = require("request");
+    let muscle = req.body.muscle;
+    request.get(
+        {
+            url: "https://api.api-ninjas.com/v1/exercises?muscle=" + muscle,
+            headers: {
+                "X-Api-Key": "zGgdF2+Y4cdd1MJv0h/FCw==8bXrFC72ymStibRL",
+            },
+        },
+        function (error, response, body) {
+            if (error) return console.error("Request failed:", error);
+            else if (response.statusCode != 200)
+                return console.error(
+                    "Error:",
+                    response.statusCode,
+                    body.toString("utf8")
+                );
+            else {
+                let data = JSON.parse(body);
+                let nameArray = [];
+                for (i = 0; i < data.length; i++) {
+                    nameArray.push(data[i].name);
+                }
 
+                res.render("workouts");
+            }
+        }
+    );
+});
+app.post("/showWorkouts", function (req, res) {
+    const request = require("request");
+    let muscle = req.body.muscle;
+    request.get(
+        {
+            url: "https://api.api-ninjas.com/v1/exercises?muscle=" + muscle,
+            headers: {
+                "X-Api-Key": "zGgdF2+Y4cdd1MJv0h/FCw==8bXrFC72ymStibRL",
+            },
+        },
+        function (error, response, body) {
+            if (error) return console.error("Request failed:", error);
+            else if (response.statusCode != 200)
+                return console.error(
+                    "Error:",
+                    response.statusCode,
+                    body.toString("utf8")
+                );
+            else {
+                let data = JSON.parse(body);
+                let exercises = [];
+                for (i = 0; i < data.length; i++) {
+                    exercises.push(data[i].name);
+                    res.json({ exercises: exercises });
+                }
+                console.log(exercises);
+            }
+        }
+    );
+});
 
 // app.posts
 
@@ -194,32 +234,31 @@ app.post("/newUser", function (req, res) {
                 height: height,
                 userPassword: hashedPassword,
                 exerciseGoal: exerciseGoal,
-                days: []
-            })
-            newUser.save()
-            .then(() => {
-                user.findOne({ userName: userName }).then(foundUser => {
-                        if (foundUser.sex == "male") {
-                            foundUser.waterGoal = 125;
-                            foundUser.calorieGoal =
-                                (66.47 +
-                                    6.24 * foundUser.weight +
-                                    12.7 * foundUser.height -
-                                    6.755 * foundUser.age) *
-                                1.4;
-                            foundUser.save();
-                        } else if (foundUser.sex == "female") {
-                            foundUser.waterGoal = 91;
-                            foundUser.calorieGoal =
-                                (655.1 +
-                                    4.35 * foundUser.weight +
-                                    4.7 * foundUser.height -
-                                    4.7 * foundUser.age) *
-                                1.4;
-                            foundUser.save();
-                        }
-                    });
-            })
+                days: [],
+            });
+            newUser.save().then(() => {
+                user.findOne({ userName: userName }).then((foundUser) => {
+                    if (foundUser.sex == "male") {
+                        foundUser.waterGoal = 125;
+                        foundUser.calorieGoal =
+                            (66.47 +
+                                6.24 * foundUser.weight +
+                                12.7 * foundUser.height -
+                                6.755 * foundUser.age) *
+                            1.4;
+                        foundUser.save();
+                    } else if (foundUser.sex == "female") {
+                        foundUser.waterGoal = 91;
+                        foundUser.calorieGoal =
+                            (655.1 +
+                                4.35 * foundUser.weight +
+                                4.7 * foundUser.height -
+                                4.7 * foundUser.age) *
+                            1.4;
+                        foundUser.save();
+                    }
+                });
+            });
             res.render("signin");
         }
     });
@@ -252,41 +291,38 @@ app.post("/signin", function (req, res) {
             } else if (result) {
                 let newDayExists = false;
                 foundUser.days.forEach((day) => {
-                        if(day.date === formattedToday) {
-                                newDayExists = true;
-                                return;
-                        }
-                })
-                if (newDayExists){
-                                res.redirect("/home");
-                } else{ 
-                        let newDay = new day({
-                                date: formattedToday,
-                                waterProgress: 10,
-                                exerciseProgress: 0,
-                                calorieProgress: 0
-                        })
-                                console.log(newDay);
-                                foundUser.days.push(newDay);
-                                foundUser.save();
-                                res.redirect("/home");
+                    if (day.date === formattedToday) {
+                        newDayExists = true;
+                        return;
+                    }
+                });
+                if (newDayExists) {
+                    res.redirect("/home");
+                } else {
+                    let newDay = new day({
+                        date: formattedToday,
+                        waterProgress: 10,
+                        exerciseProgress: 0,
+                        calorieProgress: 0,
+                    });
+                    console.log(newDay);
+                    foundUser.days.push(newDay);
+                    foundUser.save();
+                    res.redirect("/home");
                 }
             } else {
                 console.log("incorrect password");
                 res.redirect("/signin");
             }
         });
-                const today = foundUser.days.find((d) => d.date == formattedToday)
-                if (today && today.waterProgress){
-                        req.session.waterProgress = today.waterProgress;
-                        req.session.exerciseProgress = today.exerciseProgress;
-                        req.session.calorieProgress = today.calorieProgress;
-                }
+        const today = foundUser.days.find((d) => d.date == formattedToday);
+        if (today && today.waterProgress) {
+            req.session.waterProgress = today.waterProgress;
+            req.session.exerciseProgress = today.exerciseProgress;
+            req.session.calorieProgress = today.calorieProgress;
         }
-        )
     });
-
-
+});
 
 // Change Water Goal Manually
 app.post("/waterChange", function (req, res) {
@@ -398,43 +434,58 @@ app.post("/customCals", function (req, res) {
 });
 
 // Log Water
-app.post("/addWater", function(req, res){
-        user.findOne({userName: req.session.userName})
-        .then(foundUser => {
-                const today = foundUser.days.find((d) => d.date == req.session.day);
-                console.log(today, req.body.logWater, req.session.waterProgress, today.waterProgress);
-                today.waterProgress = req.session.waterProgress + Number(req.body.logWater);
-                foundUser.save();
-                req.session.waterProgress = today.waterProgress;
-                res.redirect("/home");
-        })
-})
+app.post("/addWater", function (req, res) {
+    user.findOne({ userName: req.session.userName }).then((foundUser) => {
+        const today = foundUser.days.find((d) => d.date == req.session.day);
+        console.log(
+            today,
+            req.body.logWater,
+            req.session.waterProgress,
+            today.waterProgress
+        );
+        today.waterProgress =
+            req.session.waterProgress + Number(req.body.logWater);
+        foundUser.save();
+        req.session.waterProgress = today.waterProgress;
+        res.redirect("/home");
+    });
+});
 
 // Log Exercise
-app.post("/addExercise", function(req, res){
-        user.findOne({userName: req.session.userName})
-        .then(foundUser => {
-                const today = foundUser.days.find((d) => d.date == req.session.day);
-                console.log(today, req.body.logExercise, req.session.exerciseProgress, today.exerciseProgress);
-                today.exerciseProgress = req.session.exerciseProgress + Number(req.body.logExercise);
-                foundUser.save();
-                req.session.exerciseProgress = today.exerciseProgress;
-                res.redirect("/home");
-        })
-})
+app.post("/addExercise", function (req, res) {
+    user.findOne({ userName: req.session.userName }).then((foundUser) => {
+        const today = foundUser.days.find((d) => d.date == req.session.day);
+        console.log(
+            today,
+            req.body.logExercise,
+            req.session.exerciseProgress,
+            today.exerciseProgress
+        );
+        today.exerciseProgress =
+            req.session.exerciseProgress + Number(req.body.logExercise);
+        foundUser.save();
+        req.session.exerciseProgress = today.exerciseProgress;
+        res.redirect("/home");
+    });
+});
 
 // Log Water
-app.post("/addCalories", function(req, res){
-        user.findOne({userName: req.session.userName})
-        .then(foundUser => {
-                const today = foundUser.days.find((d) => d.date == req.session.day);
-                console.log(today, Number(req.body.logCalories), req.session.calorieProgress, today.calorieProgress);
-                today.calorieProgress = req.session.calorieProgress + Number(req.body.logCalories);
-                foundUser.save();
-                req.session.calorieProgress = today.calorieProgress;
-                res.redirect("/home");
-        })
-})
+app.post("/addCalories", function (req, res) {
+    user.findOne({ userName: req.session.userName }).then((foundUser) => {
+        const today = foundUser.days.find((d) => d.date == req.session.day);
+        console.log(
+            today,
+            Number(req.body.logCalories),
+            req.session.calorieProgress,
+            today.calorieProgress
+        );
+        today.calorieProgress =
+            req.session.calorieProgress + Number(req.body.logCalories);
+        foundUser.save();
+        req.session.calorieProgress = today.calorieProgress;
+        res.redirect("/home");
+    });
+});
 
 // Signout Function
 app.post("/signout", function (req, res) {
@@ -454,27 +505,24 @@ app.get(
         exerciseVariable = req.session.exerciseGoal;
         calorieVariable = req.session.calorieGoal;
 
-
         res.json({ waterVariable, exerciseVariable, calorieVariable });
     }
 );
 
 app.get(
-        "/api/goalProgress/:waterProgress/:exerciseProgress/:calorieProgress",
-        function(req,res){
+    "/api/goalProgress/:waterProgress/:exerciseProgress/:calorieProgress",
+    function (req, res) {
+        let waterProgress = req.params.waterProgress;
+        let exerciseProgress = req.params.exerciseProgress;
+        let calorieProgress = req.params.calorieProgress;
 
-                let waterProgress = req.params.waterProgress;
-                let exerciseProgress = req.params.exerciseProgress;
-                let calorieProgress = req.params.calorieProgress;
-                
-                waterProgress = req.session.waterProgress;
-                exerciseProgress = req.session.exerciseProgress;
-                calorieProgress = req.session.calorieProgress;
+        waterProgress = req.session.waterProgress;
+        exerciseProgress = req.session.exerciseProgress;
+        calorieProgress = req.session.calorieProgress;
 
-                res.json({ waterProgress, exerciseProgress, calorieProgress });        
-        }
+        res.json({ waterProgress, exerciseProgress, calorieProgress });
+    }
 );
-
 
 app.listen(3000, function (req, res) {
     console.log("server is running on port 3000");

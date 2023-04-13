@@ -1,4 +1,22 @@
 <%- include('header') %>
 <%- include('navbar') %>
 
-<p><%=shownData%></p>
+<form action="/showWorkouts" method="post">
+        <select id="muscle" name="muscle">
+                <option value=""></option>
+                <option value="chest">chest</option>
+                <option value="biceps">Biceps</option>
+                <option value="triceps">Triceps</option>
+                <option value="triceps">Triceps</option>
+                <option value="triceps">Triceps</option>
+                <option value="triceps">Triceps</option>
+        </select>
+        <button id="showWorkoutsBtn" class="btn btn-primary" type="submit">See Exercises</button>
+</form>
+<div id="exerciseList"></div>
+
+
+
+
+<script src="workouts.js"></script>
+<%- include('footer')%>
