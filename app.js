@@ -165,14 +165,19 @@ app.get("/workouts", function (req, res) {
                 let data = JSON.parse(body);
                 let nameArray = [];
                 for (i = 0; i < data.length; i++) {
-                    nameArray.push(data[i].name);
+                    console.log(data.name)
+                    nameArray.push(JSON.stringify(data[i].name));
                 }
-
-                res.render("workouts");
+                res.render("workouts", { exercises: nameArray });
             }
         }
     );
 });
+
+app.post("/test", function(req,res){
+    
+})
+
 app.post("/showWorkouts", function (req, res) {
     const request = require("request");
     let muscle = req.body.muscle;
@@ -196,9 +201,9 @@ app.post("/showWorkouts", function (req, res) {
                 let exercises = [];
                 for (i = 0; i < data.length; i++) {
                     exercises.push(data[i].name);
-                    res.json({ exercises: exercises });
                 }
                 console.log(exercises);
+                res.json({ exercises: exercises });
             }
         }
     );

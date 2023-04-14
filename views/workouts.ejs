@@ -1,22 +1,69 @@
 <%- include('header') %>
 <%- include('navbar') %>
 
-<form action="/showWorkouts" method="post">
+<form action="showWorkouts" method="post" id="dynamicExercises">
         <select id="muscle" name="muscle">
                 <option value=""></option>
                 <option value="chest">chest</option>
                 <option value="biceps">Biceps</option>
                 <option value="triceps">Triceps</option>
-                <option value="triceps">Triceps</option>
-                <option value="triceps">Triceps</option>
-                <option value="triceps">Triceps</option>
         </select>
         <button id="showWorkoutsBtn" class="btn btn-primary" type="submit">See Exercises</button>
 </form>
-<div id="exerciseList"></div>
+
+<form action="/test" method="post">
+        <div id="exerciseList">
+                <!-- results will be inserted here -->
+
+            </div>
+            <button id='testButton' type="submit">Test</button>
+</form>
+
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function() {
+            // listen for form submission
+            $("#dynamicExercises").on("submit", function(e) {
+                e.preventDefault();
+                // get selected muscle
+                var muscle = $("#muscle").val();
+                // send POST request to server
+                $.ajax({
+                    url: "/showWorkouts",
+                    method: "POST",
+                    data: { muscle: muscle },
+                    success: function(response) {
+                        // update exercise list with results
+                        var exercises = response.exercises;
+                        var html = "";
+                        for (var i = 0; i < exercises.length; i++) {
+                            html += "<label><input type='radio' name='exercise' value='" + exercises[i] + "'>" + exercises[i] + "</label><br>   ";
+                        }
+                        $("#exerciseList").html(html);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+        
+        let list = document.getElementsByName('exercise');
+        let button = document.getElementById('testButton');
+        
+        button.addEventListener('click', function(){
+                for(i=0; i < list.length; i++){
+                        if(list[i].checked){
+                                console.log(list[i].value);
+                        }
+                }
+
+        })
+    </script>
 
 
 
 
-<script src="workouts.js"></script>
+<!-- <script src="workouts.js"></script> -->
 <%- include('footer')%>
