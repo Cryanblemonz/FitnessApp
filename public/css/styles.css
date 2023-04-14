@@ -225,3 +225,32 @@ h4{
         margin-top: 20px;
         width: auto;
 }
+
+#exerciseList{
+        font-size: 1.2rem;
+}
+
+#workoutBuilder{
+        height: 120vh;
+        border: 2px solid black;
+        border-style: hidden solid hidden solid;
+        background-color: rgb(53, 48, 48);
+        color: white;
+}
+
+#workoutBuilder h3{
+        text-align: center;
+        padding-top: 5%;   
+}
+
+.exercise-search{
+        padding-left: 5%;
+}
+
+.exercise-dropdown{
+        margin-bottom: 1%;
+}
+
+#exerciseList{
+        margin: 10px;
+}

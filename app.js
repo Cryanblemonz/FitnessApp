@@ -94,6 +94,10 @@ const user = mongoose.model("user", userSchema);
 
 // app.gets
 
+app.get("/", function (req,res){
+    res.redirect("/home");
+})
+
 app.get("/signup", function (req, res) {
     res.render("signup");
 });
@@ -144,38 +148,39 @@ app.get("/calorieQuestions", function (req, res) {
 });
 
 app.get("/workouts", function (req, res) {
-    const request = require("request");
-    let muscle = req.body.muscle;
-    request.get(
-        {
-            url: "https://api.api-ninjas.com/v1/exercises?muscle=" + muscle,
-            headers: {
-                "X-Api-Key": "zGgdF2+Y4cdd1MJv0h/FCw==8bXrFC72ymStibRL",
-            },
-        },
-        function (error, response, body) {
-            if (error) return console.error("Request failed:", error);
-            else if (response.statusCode != 200)
-                return console.error(
-                    "Error:",
-                    response.statusCode,
-                    body.toString("utf8")
-                );
-            else {
-                let data = JSON.parse(body);
-                let nameArray = [];
-                for (i = 0; i < data.length; i++) {
-                    console.log(data.name)
-                    nameArray.push(JSON.stringify(data[i].name));
-                }
-                res.render("workouts", { exercises: nameArray });
-            }
-        }
-    );
-});
+    // const request = require("request");
+    // let muscle = req.body.muscle;
+    // request.get(
+    //     {
+    //         url: "https://api.api-ninjas.com/v1/exercises?muscle=" + muscle,
+    //         headers: {
+    //             "X-Api-Key": "zGgdF2+Y4cdd1MJv0h/FCw==8bXrFC72ymStibRL",
+    //         },
+    //     },
+    //     function (error, response, body) {
+    //         if (error) return console.error("Request failed:", error);
+    //         else if (response.statusCode != 200)
+    //             return console.error(
+    //                 "Error:",
+    //                 response.statusCode,
+    //                 body.toString("utf8")
+    //             );
+    //         else {
+    //             let data = JSON.parse(body);
+    //             let nameArray = [];
+    //             for (i = 0; i < data.length; i++) {
+    //                 console.log(data.name)
+    //                 nameArray.push(JSON.stringify(data[i].name));
+    //             }
+                res.render("workouts");
+            })
+//         }
+//     );
+// });
 
 app.post("/test", function(req,res){
-    
+    let array = req.body.arr;
+    console.log(array);
 })
 
 app.post("/showWorkouts", function (req, res) {
@@ -202,7 +207,6 @@ app.post("/showWorkouts", function (req, res) {
                 for (i = 0; i < data.length; i++) {
                     exercises.push(data[i].name);
                 }
-                console.log(exercises);
                 res.json({ exercises: exercises });
             }
         }
