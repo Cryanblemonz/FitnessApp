@@ -297,30 +297,37 @@ app.post("/signin", function (req, res) {
                     }
                 });
                 if (newDayExists) {
-                    res.redirect("/home");
+                    const today = foundUser.days.find((d) => d.date == formattedToday);
+                        req.session.waterProgress = today.waterProgress;
+                        req.session.exerciseProgress = today.exerciseProgress;
+                        req.session.calorieProgress = today.calorieProgress;
+                        res.redirect("/home");
                 } else {
                     let newDay = new day({
                         date: formattedToday,
-                        waterProgress: 10,
+                        waterProgress: 0,
                         exerciseProgress: 0,
                         calorieProgress: 0,
                     });
                     console.log(newDay);
                     foundUser.days.push(newDay);
-                    foundUser.save();
-                    res.redirect("/home");
+                    foundUser.save()
+                    .then(() =>{
+                        const today = foundUser.days.find((d) => d.date == formattedToday);
+                        if (today && today.waterProgress) {
+                            req.session.waterProgress = today.waterProgress;
+                            req.session.exerciseProgress = today.exerciseProgress;
+                            req.session.calorieProgress = today.calorieProgress;
+                            res.redirect("/home");
+                        }
+                    })
                 }
             } else {
                 console.log("incorrect password");
                 res.redirect("/signin");
             }
         });
-        const today = foundUser.days.find((d) => d.date == formattedToday);
-        if (today && today.waterProgress) {
-            req.session.waterProgress = today.waterProgress;
-            req.session.exerciseProgress = today.exerciseProgress;
-            req.session.calorieProgress = today.calorieProgress;
-        }
+
     });
 });
 
