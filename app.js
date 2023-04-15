@@ -147,41 +147,29 @@ app.get("/calorieQuestions", function (req, res) {
     });
 });
 
+let exercises = [];
+    
 app.get("/workouts", function (req, res) {
-    // const request = require("request");
-    // let muscle = req.body.muscle;
-    // request.get(
-    //     {
-    //         url: "https://api.api-ninjas.com/v1/exercises?muscle=" + muscle,
-    //         headers: {
-    //             "X-Api-Key": "zGgdF2+Y4cdd1MJv0h/FCw==8bXrFC72ymStibRL",
-    //         },
-    //     },
-    //     function (error, response, body) {
-    //         if (error) return console.error("Request failed:", error);
-    //         else if (response.statusCode != 200)
-    //             return console.error(
-    //                 "Error:",
-    //                 response.statusCode,
-    //                 body.toString("utf8")
-    //             );
-    //         else {
-    //             let data = JSON.parse(body);
-    //             let nameArray = [];
-    //             for (i = 0; i < data.length; i++) {
-    //                 console.log(data.name)
-    //                 nameArray.push(JSON.stringify(data[i].name));
-    //             }
-                res.render("workouts");
-            })
-//         }
-//     );
-// });
+    res.render("workouts", {exercises: exercises});
+});
 
-app.post("/test", function(req,res){
-    let array = req.body.arr;
-    console.log(array);
-})
+app.post("/test", (req, res) => {
+  let selectedExercises = req.body.selectedExercises;
+  exercises.push(...selectedExercises);
+  res.sendStatus(200)
+    console.log(exercises)
+    console.log(exercises.length);
+    res.json({exercises: exercises})
+    res.redirect('/workouts');
+});
+
+    app.post("/clear", function (req,res){
+        exercises = [];
+        console.log(exercises);
+        console.log('array cleared')
+        res.redirect('/workouts')
+    }
+    ) 
 
 app.post("/showWorkouts", function (req, res) {
     const request = require("request");
@@ -203,15 +191,14 @@ app.post("/showWorkouts", function (req, res) {
                 );
             else {
                 let data = JSON.parse(body);
-                let exercises = [];
-                for (i = 0; i < data.length; i++) {
-                    exercises.push(data[i].name);
-                }
+                let exercises = data.map((exercise) => exercise.name); // extract only the exercise names
                 res.json({ exercises: exercises });
-            }
+                }
+            })
         }
     );
-});
+
+
 
 // app.posts
 

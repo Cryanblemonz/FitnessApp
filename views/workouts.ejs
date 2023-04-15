@@ -18,7 +18,7 @@
                         <div id="exerciseList">
                                 <!-- Exercises Populate Here -->
                         </div>
-                        <button id='testButton' type="submit">Test</button>
+                        <button id='queueButton' type="submit">Test</button>
                 </form>
         </div>
 
@@ -26,15 +26,22 @@
                 <form>
                         <div id="workoutBuilder">
                                 <h3>Workout Builder</h3>
-                                
+                                <ul id="exerciseQueue">
+                                        <% for (i=0; i < exercises.length; i++){ %>
+                                        <li> <p> <%=exercises[i] %> </p></li>
+                                        <% } %>
+                                </ul>
                         </div>
                 </form>
         </div>
 
 </div>
-
+<form action="/clear" method="post">
+        <button class='btn btn-primary' type="submit">Clear</button>
+</form>
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="workouts.js"></script>
+
 <%- include('footer')%>

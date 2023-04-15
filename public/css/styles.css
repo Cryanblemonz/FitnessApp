@@ -254,3 +254,8 @@ h4{
 #exerciseList{
         margin: 10px;
 }
+
+.queue-block{
+        border: 1px solid gray
+
+}

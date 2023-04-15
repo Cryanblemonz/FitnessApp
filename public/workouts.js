@@ -1,21 +1,20 @@
-
 $(function() {
     // listen for form submission
     $("#dynamicExercises").on("submit", function(e) {
         e.preventDefault();
         // get selected muscle
-        var muscle = $("#muscle").val();
+        let muscle = $("#muscle").val();
         // send POST request to server
         $.ajax({
             url: "/showWorkouts",
             method: "POST",
-            data: { muscle: muscle },
+            data: { muscle: muscle},
             success: function(response) {
                 // update exercise list with results
-                var exercises = response.exercises;
-                var html = "";
-                for (var i = 0; i < exercises.length; i++) {
-                    html += "<label><input type='radio' name='exercise' value='" + exercises[i] + "'> " + exercises[i] + "</label><br>   ";
+                let exercises = response.exercises;
+                let html = "";
+                for (let i = 0; i < exercises.length; i++) {
+                    html += "<label><input type='checkbox' name='exercise' class='exercise-checkbox' value='" + exercises[i] + "'> " + exercises[i] + "</label><br>   ";
                 }
                 $("#exerciseList").html(html);
             },
@@ -27,24 +26,39 @@ $(function() {
 });
 
 let list = document.getElementsByName('exercise');
-let button = document.getElementById('testButton');
+let button = document.getElementById('queueButton');
 let arr = [];
 
-button.addEventListener('click', function(){
-        for(i=0; i < list.length; i++){
-                if(list[i].checked){
-                        console.log(list[i].value);
-                        arr.push(list[i].value);
-                        // console.log(arr);
-                }
+button.addEventListener("click", function(e) {
+    e.preventDefault();
+    // get selected exercises
+    let selectedExercises = [];
+    $('input[name="exercise"]:checked').each(function() {
+      selectedExercises.push($(this).val());
+    });
+    // send POST request to server to push selected exercises to server-side array
+    $.ajax({
+      url: "/test",
+      method: "POST",
+      data: { selectedExercises: selectedExercises },
+      success: function(response) {
+        console.log("Selected exercises pushed to server-side array.");
+        console.log(selectedExercises);
+        // update exercise queue with selected exercises
+        let queue = $("#exerciseQueue");
+        for (let i = 0; i < selectedExercises.length; i++) {
+            let exercise = selectedExercises[i];
+            if (!queue.find("." + exercise).length) {
+                // only add exercise if it hasn't already been added
+                queue.append("<li class ='queue-block'> <p> " + exercise + " </p></li>");
+            }
         }
-        fetch('/test', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ arr: arr })
-          })
-           
-})
+      },
+      error: function(xhr, status, error) {
+        console.error(error);
+      }
+    });
+  });
+
+
 
