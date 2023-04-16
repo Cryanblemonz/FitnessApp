@@ -1,275 +1,306 @@
-body{
-        background-color: rgb(252, 248, 248);
-        color: black;   
-        margin: 0;
-        font-family: montserrat;
+body {
+    background-color: rgb(252, 248, 248);
+    color: black;
+    margin: 0;
+    font-family: montserrat;
 }
 
-.btn-light{
-        border: 1px solid black;
+.btn-light {
+    border: 1px solid black;
 }
 
-h2{
-        font-weight: 700;
+h2 {
+    font-weight: 700;
 }
 
-.center{
-        text-align: center; 
+.center {
+    text-align: center;
 }
-
 
 /* Signup */
 
-.newUserForm{
-        width: 70%;
-        padding: 3% 0 0 5%;
+.newUserForm {
+    width: 70%;
+    padding: 3% 0 0 5%;
 }
 
-.inches{
-        margin-top: 8px;
+.inches {
+    margin-top: 8px;
 }
-
 
 /* Signin */
 
-.signin-form{
-        text-align: center;
-        width: 50%;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 10%;
+.signin-form {
+    text-align: center;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
 }
 
-#return-to-signup{
-        font-size: 10px;
+#return-to-signup {
+    font-size: 10px;
 }
 
 /* Navbar */
 
-.navbar{
-        margin: 0;
-        padding: 0;
+.navbar {
+    margin: 0;
+    padding: 0;
 }
 
-.navbar a{
-        color: whitesmoke!important;  
+.navbar a {
+    color: whitesmoke !important;
 }
 
-.d-flex .form-control{
-        margin-bottom: 10px;
+.d-flex .form-control {
+    margin-bottom: 10px;
 }
 
-.d-flex button{
-        margin-bottom: 10px;
+.d-flex button {
+    margin-bottom: 10px;
 }
-
 
 /* Homescreen */
-h1{
-        font-family: 'Zilla Slab', serif;
-        font-size: 2.7rem;
-        font-weight: 900;
+h1 {
+    font-family: "Zilla Slab", serif;
+    font-size: 2.7rem;
+    font-weight: 900;
 }
 
-#dashboard{
-        position: relative;
+#dashboard {
+    position: relative;
 }
 
-.page-headings{
-        padding: 3% 0 0 5%;
+.page-headings {
+    padding: 3% 0 0 5%;
 }
 
-#saved-workouts{
-        height: 120vh;
-        border: 2px solid black;
-        border-style: hidden solid hidden solid;
-        background-color: rgb(53, 48, 48);
-        overflow-y: scroll;
-        color: white;
+#saved-workouts {
+    height: 120vh;
+    border: 2px solid black;
+    border-style: hidden solid hidden solid;
+    background-color: rgb(53, 48, 48);
+    overflow-y: scroll;
+    color: white;
 }
 
-.toggle-button{
-        display: inline;
-        z-index: 1;
-        border: 1px solid #000000;
-        position: absolute;
-        right: 0;
-        padding: 5px 2px;
-        margin: 5px;
+.toggle-button {
+    display: inline;
+    z-index: 1;
+    border: 1px solid #000000;
+    position: absolute;
+    right: 0;
+    padding: 5px 2px;
+    margin: 5px;
 }
 
-.right{
-        right: 0;
+.right {
+    right: 0;
 }
 
-.goals{
-        margin: 30px 50px;
-        text-align: center;
+.goals {
+    margin: 30px 50px;
+    text-align: center;
 }
 
-.donut{
-        margin: 10px auto;      
+.donut {
+    margin: 10px auto;
 }
 
-.log-button{
-        border-radius: 100%;
+.log-button {
+    border-radius: 100%;
 }
 
-.log-para{
-        padding: 5px 0;
-        margin: 0;
-        font-weight: 700;
+.log-para {
+    padding: 5px 0;
+    margin: 0;
+    font-weight: 700;
 }
 
-.log-input{
-        width: 30%;
-        margin-left: auto;
-        margin-right: auto;
-        display: inline-block;
-        margin: 5px;
-        border: 1px solid black;
+.log-input {
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+    margin: 5px;
+    border: 1px solid black;
 }
 
-.goals h2{
-        width: auto;
-        margin-left: auto;
-        margin-right: auto;
-        word-wrap: normal;
+.goals h2 {
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    word-wrap: normal;
 }
 
-.collapsed-div{
-        display: none!important;
+.collapsed-div {
+    display: none !important;
 }
 
-#saved-workouts h3{
-        text-align: center;
-        padding-top: 10px;   
+#saved-workouts h3 {
+    text-align: center;
+    padding-top: 10px;
 }
 
-#saved-workouts .btn-primary{
-        width: 100%;
-        margin-bottom: 20px;
+#saved-workouts .btn-primary {
+    width: 100%;
+    margin-bottom: 20px;
 }
 
-hr{
-        width: 30%;
-        border-style: dotted none none none;
-        border-width: 6px;
-        margin: 20px auto;
+hr {
+    width: 30%;
+    border-style: dotted none none none;
+    border-width: 6px;
+    margin: 20px auto;
 }
 
-.dashboard-workout{
-        text-align: center;
+.dashboard-workout {
+    text-align: center;
 }
 
-h4{
-        margin-left: 15px;
-        padding-top: 0;
+h4 {
+    margin-left: 15px;
+    padding-top: 0;
 }
 
-.exercise-list{
-        text-align: left;
+.exercise-list {
+    text-align: left;
 }
 
 /* Goals Page */
 
-#water-goal{
-        background: rgb(0,255,234);
-        background: linear-gradient(175deg, rgba(0,255,234,1) 26%, rgba(255,230,175,1) 74%);
-        border-radius: 1%;
-        border: 1px solid black;
-        padding: 2% 0 2% 5%;
-        margin-bottom: 1%;
+#water-goal {
+    background: rgb(0, 255, 234);
+    background: linear-gradient(
+        175deg,
+        rgba(0, 255, 234, 1) 26%,
+        rgba(255, 230, 175, 1) 74%
+    );
+    border-radius: 1%;
+    border: 1px solid black;
+    padding: 2% 0 2% 5%;
+    margin-bottom: 1%;
 }
 
-#exercise-goal{
-        background: rgb(255,179,0);
-        background: linear-gradient(175deg, rgba(255,179,0,1) 26%, rgba(173,173,173,1) 74%);
-        border-radius: 1%;
-        border: 1px solid black;
-        padding: 2% 0 2% 5%;
-        margin-bottom: 1%;
+#exercise-goal {
+    background: rgb(255, 179, 0);
+    background: linear-gradient(
+        175deg,
+        rgba(255, 179, 0, 1) 26%,
+        rgba(173, 173, 173, 1) 74%
+    );
+    border-radius: 1%;
+    border: 1px solid black;
+    padding: 2% 0 2% 5%;
+    margin-bottom: 1%;
 }
 
-#calorie-goal{
-        background: rgb(55,198,19);
-        background: linear-gradient(175deg, rgba(55,198,19,1) 26%, rgba(173,173,173,1) 74%);
-        border-radius: 1%;
-        border: 1px solid black;
-        padding: 2% 2% 2% 5%;
-        margin-bottom: 1%;
+#calorie-goal {
+    background: rgb(55, 198, 19);
+    background: linear-gradient(
+        175deg,
+        rgba(55, 198, 19, 1) 26%,
+        rgba(173, 173, 173, 1) 74%
+    );
+    border-radius: 1%;
+    border: 1px solid black;
+    padding: 2% 2% 2% 5%;
+    margin-bottom: 1%;
 }
 
-.goal-div p{
-        padding: 3px;
+.goal-div p {
+    padding: 3px;
 }
 
-#changeCalories, #changeExercise, #changeWater{
-        padding-top: 20px;
-        font-weight: 700;
-        text-align: center;
+#changeCalories,
+#changeExercise,
+#changeWater {
+    padding-top: 20px;
+    font-weight: 700;
+    text-align: center;
 }
 
-.changeButton{
-        width: 50%;
-        margin: 20px;
+.changeButton {
+    width: 50%;
+    margin: 20px;
 }
 
-.changeInputDual{
-        width: 50%;
-        margin-left: auto;
-        margin-right: auto;
+.changeInputDual {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.qButton{
-        margin-top: 20px;
-        width: auto;
+.qButton {
+    margin-top: 20px;
+    width: auto;
 }
 
-#exerciseList{
-        font-size: 1.2rem;
+#exerciseList {
+    font-size: 1.2rem;
 }
 
-#workoutBuilder{
-        height: 100vh;
-        border: 2px solid black;
-        border-style: hidden solid hidden solid;
-        background-color: rgb(53, 48, 48);
-        color: white;
-        position: fixed;
-        width: 43%;
-        text-align: center;
-        overflow-y: scroll;
+#workoutBuilder {
+    height: 100vh;
+    width: 30%;
+    border: 2px solid black;
+    border-style: hidden solid hidden solid;
+    background-color: rgb(53, 48, 48);
+    color: white;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    overflow-y: scroll;
 }
 
-#workoutBuilder ul{
-        display: inline-block;
+@media (max-width: 768px){
+        #workoutBuilder{
+                width: 100%;
+                margin-top: 25px;       
+        }
+}
+
+#workoutBuilder ul {
+    display: inline-block;
+    text-align: left;
+    margin-right: 20%;
+}
+
+#workoutBuilder h3 {
+    text-align: center;
+    padding-top: 5%;
+}
+
+.exercise-search {
+    padding-left: 5%;
+}
+
+.exercise-dropdown {
+    margin-bottom: 1%;
+}
+
+#exerciseList {
+    margin: 10px;
+}
+
+.builder-button {
+    width: 75%;
+    background-color: rgb(166, 229, 240)!important;
+}
+
+.clear-button {
+    margin: 10px;
+    opacity: 75%;
+}
+
+.workout-name{
+        width: 75%;
+        margin-bottom: 10px;
         text-align: left;
-        margin-right: 20%;
 }
 
-#workoutBuilder h3{
-        text-align: center;
-        padding-top: 5%;   
-}
-
-.exercise-search{
-        padding-left: 5%;
-}
-
-.exercise-dropdown{
-        margin-bottom: 1%;
-}
-
-#exerciseList{
-        margin: 10px;
-}
-
-.builder-button{
-        width: 90%;
-}
-
-.clear-button{
-        margin: 10px;
-        opacity: 75%;
+.workout-name-div{
+        text-align: left;
+        margin-left: 18%;
 }

@@ -1,67 +1,75 @@
-<%- include('header') %>
-<%- include('navbar') %>
+<%- include('header') %> <%- include('navbar') %>
 <div class="row">
-        <div class="col-lg-7 exercise-search">
-                <h1 class="page-headings">Let's build a custom workout</h1>
-                <form action="showWorkouts" method="post" id="dynamicExercises">
-                        <label for="muscle">Choose a Muscle to See Exercises</label>
-                        <select id="muscle" name="muscle" class="form-control exercise-dropdown">
-                                <option value=""></option>
-                                <option value="abdominals">Abdominals</option>
-                                <option value="abductors">Abductors</option>
-                                <option value="adductors">Adductors</option>
-                                <option value="biceps">Biceps</option>
-                                <option value="calves">Calves</option>
-                                <option value="chest">Chest</option>
-                                <option value="forearms">Forearms</option>
-                                <option value="glutes">Glutes</option>
-                                <option value="hamstrings">Hamstrings</option>
-                                <option value="lats">Lats</option>
-                                <option value="lower_back">Lower Back</option>
-                                <option value="middle_back">Middle Back</option>
-                                <option value="neck">Neck</option>
-                                <option value="quadriceps">Quadriceps</option>
-                                <option value="shoulders">Shoulders</option>
-                                <option value="traps">Traps</option>
-                                <option value="triceps">Triceps</option>
-                        </select>
-                        <button id="showWorkoutsBtn" class="btn btn-primary" type="submit">See Exercises</button>
+    <div class="col-md-7 exercise-search">
+        <h1 class="page-headings">Let's build a custom workout</h1>
+        <form action="showWorkouts" method="post" id="dynamicExercises">
+            <label for="muscle">Choose a Muscle to See Exercises</label>
+            <select
+                id="muscle"
+                name="muscle"
+                class="form-control exercise-dropdown">
+                <option value=""></option>
+                <option value="abdominals">Abdominals</option>
+                <option value="abductors">Abductors</option>
+                <option value="adductors">Adductors</option>
+                <option value="biceps">Biceps</option>
+                <option value="calves">Calves</option>
+                <option value="chest">Chest</option>
+                <option value="forearms">Forearms</option>
+                <option value="glutes">Glutes</option>
+                <option value="hamstrings">Hamstrings</option>
+                <option value="lats">Lats</option>
+                <option value="lower_back">Lower Back</option>
+                <option value="middle_back">Middle Back</option>
+                <option value="neck">Neck</option>
+                <option value="quadriceps">Quadriceps</option>
+                <option value="shoulders">Shoulders</option>
+                <option value="traps">Traps</option>
+                <option value="triceps">Triceps</option>
+            </select>
+            <button id="showWorkoutsBtn" class="btn btn-primary" type="submit">
+                See Exercises
+            </button>
+        </form>
+
+        <form action="/queue" method="post">
+            <div id="exerciseList">
+                <!-- Exercises Populate Here -->
+            </div>
+            <button id="queueButton" class="btn btn-dark" type="submit">
+                Add to Workout
+            </button>
+        </form>
+    </div>
+
+    <div class="col-md-5">
+            <div id="workoutBuilder">
+                <h3>Workout Builder</h3>
+                <hr style="width: 10%" />
+                <ul id="exerciseQueue">
+                    <% for (i=0; i < exercises.length; i++){ %>
+                    <li><p><%=exercises[i] %></p></li>
+                    <% } %>
+                </ul>
+                <form action="/saveWorkout" method="post">
+                        <div class="workout-name-div">
+                                <label for="workoutName">Workout Name</label>
+                                <input type="text" name="workoutName" class="form-control workout-name">
+
+                    <button class="btn btn-light builder-button" type="submit">
+                        Save Workout
+                    </button>
+                </div>
                 </form>
-                
-                <form action="/queue" method="post">
-                        <div id="exerciseList">
-                                <!-- Exercises Populate Here -->
-                        </div>
-                        <button id='queueButton' class="btn btn-warning" type="submit">Add to Workout</button>
+
+                <form action="/clear" method="post">
+                    <button class="btn btn-warning clear-button" type="submit">
+                        Clear
+                    </button>
                 </form>
-        </div>
-
-        <div class="col-lg-5">
-                <form>
-                        <div id="workoutBuilder">
-                                <h3>Workout Builder</h3>
-                                <hr style="width: 10%">
-                                        <ul id="exerciseQueue">
-                                                <% for (i=0; i < exercises.length; i++){ %>
-                                                <li> <p> <%=exercises[i] %> </p></li>
-                                                <% } %>
-
-                                        </ul>
-                                        <form action="/saveWorkout" method="post">
-                                                <button class="btn btn-light builder-button" type="submit">Save Workout</button>
-                                        </form>
-
-                                        <form action="/clear" method="post">
-                                                <button class='btn btn-warning clear-button' type="submit">Clear</button>
-                                        </form>
-
-                        </div>
-                </form>
-        </div>
-
+            </div>
+    </div>
 </div>
-
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="workouts.js"></script>
