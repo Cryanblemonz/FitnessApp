@@ -44,6 +44,75 @@ const daySchema = mongoose.Schema({
 // Day Model
 const day = mongoose.model("day", daySchema);
 
+//Workout Schema
+const workoutSchema = mongoose.Schema({
+    name: {
+        type: String
+    },
+    exercise1: {
+        type: String
+    },
+    exercise2: {
+        type: String
+    },
+    exercise3: {
+        type: String
+    },
+    exercise4: {
+        type: String
+    },
+    exercise5: {
+        type: String
+    },
+    exercise6: {
+        type: String
+    },
+    exercise7: {
+        type: String
+    },
+    exercise8: {
+        type: String
+    },
+    exercise9: {
+        type: String
+    },
+    exercise10: {
+        type: String
+    },
+    exercise11: {
+        type: String
+    },
+    exercise12: {
+        type: String
+    },
+    exercise13: {
+        type: String
+    },
+    exercise14: {
+        type: String
+    },
+    exercise15: {
+        type: String
+    },
+    exercise16: {
+        type: String
+    },
+    exercise17: {
+        type: String
+    },
+    exercise18: {
+        type: String
+    },
+    exercise19: {
+        type: String
+    },
+    exercise20: {
+        type: String
+    }
+});
+// Workout model
+const workout = mongoose.model('workout', workoutSchema);
+
 // UserSchema
 const userSchema = mongoose.Schema({
     firstName: {
@@ -88,6 +157,8 @@ const userSchema = mongoose.Schema({
         type: Number,
     },
     days: [daySchema],
+
+    workouts: [workoutSchema]
 });
 // User Model
 const user = mongoose.model("user", userSchema);
@@ -148,12 +219,12 @@ app.get("/calorieQuestions", function (req, res) {
 });
 
 let exercises = [];
-    
+
 app.get("/workouts", function (req, res) {
     res.render("workouts", {exercises: exercises});
 });
 
-app.post("/test", (req, res) => {
+app.post("/queue", (req, res) => {
   let selectedExercises = req.body.selectedExercises;
   exercises.push(...selectedExercises);
   res.sendStatus(200)
@@ -198,7 +269,44 @@ app.post("/showWorkouts", function (req, res) {
         }
     );
 
+// app.post("/saveWorkout", function(req,res){
+//     user.findOne({username: req.session.userName})
+//     .then(foundUser => {
+//         const newWorkout = new workout({
+//             exercise1: exercises[0],
+//             exercise2: exercises[1],
+//             exercise3: exercises[2],
+//             exercise4: exercises[3],
+//             exercise5: exercises[4],
+//             exercise6: exercises[5],
+//             exercise7: exercises[6],
+//             exercise8: exercises[7],
+//             exercise9: exercises[8],
+//             exercise10: exercises[9],
+//             exercise11: exercises[10],
+//             exercise12: exercises[11],
+//             exercise13: exercises[12],
+//             exercise14: exercises[13],
+//             exercise15: exercises[14],
+//             exercise16: exercises[15],
+//             exercise17: exercises[16],
+//             exercise18: exercises[17],
+//             exercise19: exercises[18],
+//             exercise20: exercises[19],
+//         })
+//         foundUser.workouts.push(newWorkout)
+//         .then(()=> {
+//             foundUser.save();
 
+//         })     
+//         .catch((error)=>{
+//             console.log(error);
+//         }
+//         )
+//         exercises = [];
+//     })
+
+// })
 
 // app.posts
 

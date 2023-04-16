@@ -231,11 +231,21 @@ h4{
 }
 
 #workoutBuilder{
-        height: 120vh;
+        height: 100vh;
         border: 2px solid black;
         border-style: hidden solid hidden solid;
         background-color: rgb(53, 48, 48);
         color: white;
+        position: fixed;
+        width: 43%;
+        text-align: center;
+        overflow-y: scroll;
+}
+
+#workoutBuilder ul{
+        display: inline-block;
+        text-align: left;
+        margin-right: 20%;
 }
 
 #workoutBuilder h3{
@@ -255,7 +265,11 @@ h4{
         margin: 10px;
 }
 
-.queue-block{
-        border: 1px solid gray
+.builder-button{
+        width: 90%;
+}
 
+.clear-button{
+        margin: 10px;
+        opacity: 75%;
 }

@@ -25,9 +25,15 @@ $(function() {
     });
 });
 
+// let showButton = document.getElementById('showWorkoutsBtn');
 let list = document.getElementsByName('exercise');
 let button = document.getElementById('queueButton');
 let arr = [];
+
+// showButton.addEventListener('click', function(){
+//     button.classList.remove('collapsed-div');
+// })
+
 
 button.addEventListener("click", function(e) {
     e.preventDefault();
@@ -38,7 +44,7 @@ button.addEventListener("click", function(e) {
     });
     // send POST request to server to push selected exercises to server-side array
     $.ajax({
-      url: "/test",
+      url: "/queue",
       method: "POST",
       data: { selectedExercises: selectedExercises },
       success: function(response) {

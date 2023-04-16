@@ -7,18 +7,32 @@
                         <label for="muscle">Choose a Muscle to See Exercises</label>
                         <select id="muscle" name="muscle" class="form-control exercise-dropdown">
                                 <option value=""></option>
-                                <option value="chest">Chest</option>
+                                <option value="abdominals">Abdominals</option>
+                                <option value="abductors">Abductors</option>
+                                <option value="adductors">Adductors</option>
                                 <option value="biceps">Biceps</option>
+                                <option value="calves">Calves</option>
+                                <option value="chest">Chest</option>
+                                <option value="forearms">Forearms</option>
+                                <option value="glutes">Glutes</option>
+                                <option value="hamstrings">Hamstrings</option>
+                                <option value="lats">Lats</option>
+                                <option value="lower_back">Lower Back</option>
+                                <option value="middle_back">Middle Back</option>
+                                <option value="neck">Neck</option>
+                                <option value="quadriceps">Quadriceps</option>
+                                <option value="shoulders">Shoulders</option>
+                                <option value="traps">Traps</option>
                                 <option value="triceps">Triceps</option>
                         </select>
                         <button id="showWorkoutsBtn" class="btn btn-primary" type="submit">See Exercises</button>
                 </form>
                 
-                <form action="/test" method="post">
+                <form action="/queue" method="post">
                         <div id="exerciseList">
                                 <!-- Exercises Populate Here -->
                         </div>
-                        <button id='queueButton' type="submit">Test</button>
+                        <button id='queueButton' class="btn btn-warning" type="submit">Add to Workout</button>
                 </form>
         </div>
 
@@ -26,19 +40,27 @@
                 <form>
                         <div id="workoutBuilder">
                                 <h3>Workout Builder</h3>
-                                <ul id="exerciseQueue">
-                                        <% for (i=0; i < exercises.length; i++){ %>
-                                        <li> <p> <%=exercises[i] %> </p></li>
-                                        <% } %>
-                                </ul>
+                                <hr style="width: 10%">
+                                        <ul id="exerciseQueue">
+                                                <% for (i=0; i < exercises.length; i++){ %>
+                                                <li> <p> <%=exercises[i] %> </p></li>
+                                                <% } %>
+
+                                        </ul>
+                                        <form action="/saveWorkout" method="post">
+                                                <button class="btn btn-light builder-button" type="submit">Save Workout</button>
+                                        </form>
+
+                                        <form action="/clear" method="post">
+                                                <button class='btn btn-warning clear-button' type="submit">Clear</button>
+                                        </form>
+
                         </div>
                 </form>
         </div>
 
 </div>
-<form action="/clear" method="post">
-        <button class='btn btn-primary' type="submit">Clear</button>
-</form>
+
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
