@@ -44,72 +44,19 @@ const daySchema = mongoose.Schema({
 // Day Model
 const day = mongoose.model("day", daySchema);
 
-//Workout Schema
+// Workout Schema
 const workoutSchema = mongoose.Schema({
-    name: {
+    name: String,
+  });
+  
+  for (let i = 1; i <= 20; i++) {
+    workoutSchema.add({
+      [`exercise${i}`]: {
         type: String,
-    },
-    exercise1: {
-        type: String,
-    },
-    exercise2: {
-        type: String,
-    },
-    exercise3: {
-        type: String,
-    },
-    exercise4: {
-        type: String,
-    },
-    exercise5: {
-        type: String,
-    },
-    exercise6: {
-        type: String,
-    },
-    exercise7: {
-        type: String,
-    },
-    exercise8: {
-        type: String,
-    },
-    exercise9: {
-        type: String,
-    },
-    exercise10: {
-        type: String,
-    },
-    exercise11: {
-        type: String,
-    },
-    exercise12: {
-        type: String,
-    },
-    exercise13: {
-        type: String,
-    },
-    exercise14: {
-        type: String,
-    },
-    exercise15: {
-        type: String,
-    },
-    exercise16: {
-        type: String,
-    },
-    exercise17: {
-        type: String,
-    },
-    exercise18: {
-        type: String,
-    },
-    exercise19: {
-        type: String,
-    },
-    exercise20: {
-        type: String,
-    },
-});
+      },
+    });
+  }
+  
 // Workout model
 const workout = mongoose.model("workout", workoutSchema);
 
@@ -184,6 +131,7 @@ app.get("/home", function (req, res) {
     }
     const hour = new Date().getHours();
     let timeGreeting;
+
     if (hour < 5 || hour > 17) {
         timeGreeting = "Good Evening, ";
     } else if (hour > 5 && hour < 12) {
@@ -191,9 +139,14 @@ app.get("/home", function (req, res) {
     } else {
         timeGreeting = "Good Afternoon, ";
     }
-    res.render("home", {
-        firstName: req.session.firstName,
-        timeGreeting: timeGreeting,
+    user.findOne({userName: req.session.userName})
+    .then(foundUser => {
+        let workouts = foundUser.workouts
+        res.render("home", {
+            firstName: req.session.firstName,
+            timeGreeting: timeGreeting,
+            workouts: workouts
+    })
     });
 });
 
@@ -221,13 +174,20 @@ app.get("/calorieQuestions", function (req, res) {
 let exercises = [];
 
 app.get("/workouts", function (req, res) {
+    if (!req.session.isLoggedIn) {
+        res.redirect("/signin");
+        return;
+    } else {
     res.render("workouts", { exercises: exercises });
+    }
 });
 
 app.post("/queue", (req, res) => {
     let selectedExercises = req.body.selectedExercises;
-    exercises.push(...selectedExercises);
-    res.sendStatus(200);
+    if(exercises.length < 20){
+        exercises.push(...selectedExercises);
+        res.sendStatus(200);
+    }
 });
 
 app.post("/clear", function (req, res) {
@@ -396,47 +356,32 @@ app.post("/signin", function (req, res) {
 
 app.post("/saveWorkout", function (req, res) {
     user.findOne({ userName: req.session.userName })
-        .then((foundUser) => {
-            if (foundUser) {
-                const newWorkout = new workout({
-                    name: req.body.workoutName,
-                    exercise1: exercises[0],
-                    exercise2: exercises[1],
-                    exercise3: exercises[2],
-                    exercise4: exercises[3],
-                    exercise5: exercises[4],
-                    exercise6: exercises[5],
-                    exercise7: exercises[6],
-                    exercise8: exercises[7],
-                    exercise9: exercises[8],
-                    exercise10: exercises[9],
-                    exercise11: exercises[10],
-                    exercise12: exercises[11],
-                    exercise13: exercises[12],
-                    exercise14: exercises[13],
-                    exercise15: exercises[14],
-                    exercise16: exercises[15],
-                    exercise17: exercises[16],
-                    exercise18: exercises[17],
-                    exercise19: exercises[18],
-                    exercise20: exercises[19],
-                });
-                console.log(newWorkout);
-                foundUser.workouts.push(newWorkout);
-                foundUser.save();
-            } else {
-                console.log("user not found");
-            }
-            console.log(req.session.userName);
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-        .then(() => {
-            exercises = [];
-            res.redirect("/workouts");
-        });
-});
+      .then((foundUser) => {
+        if (foundUser) {
+          const newWorkout = new workout({
+            name: req.body.workoutName,
+          });
+          for (let i = 0; i < exercises.length; i++) {
+            newWorkout[`exercise${i + 1}`] = exercises[i];
+          }
+  
+          console.log(newWorkout);
+          foundUser.workouts.push(newWorkout);
+          foundUser.save();
+        } else {
+          console.log("user not found");
+        }
+        console.log(req.session.userName);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .then(() => {
+        exercises = [];
+        res.redirect("/home");
+      });
+  });
+  
 
 // Change Water Goal Manually
 app.post("/waterChange", function (req, res) {

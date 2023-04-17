@@ -16,7 +16,7 @@
         <div class="goals">
                 <h2>Your goals</h2>
                 <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-md-4 donut-div">
                                 <canvas id="waterchart" class="donut" width="250" height="250"></canvas>
                                 <button id="showWaterLog" class="btn btn-primary">Log Water</button>
 
@@ -29,7 +29,7 @@
                                 </form> 
                                 </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-md-4 donut-div">
                                 <canvas id="echart" class="donut" width="250" height="250"></canvas>
                                 <button id="showExerciseLog" class="btn btn-dark">Log Exercise</button>
                                 <div id="addExercise" class="collapsed-div">
@@ -41,7 +41,7 @@
                                         </form> 
                                         </div>
                             </div>
-                        <div class="col-lg-4">
+                        <div class="col-md-4 donut-div">
                                 <canvas id="foodchart" class="donut" width="250" height="250"></canvas>
                                 <button id="showCalorieLog" class="btn btn-light">Log Calories</button>
                                         <div id="addCalories" class="collapsed-div">
@@ -59,60 +59,31 @@
 
 
         </div>
-        <div class="col-lg-3 d-none d-lg-block" id="saved-workouts">
+        <div class="col-lg-3" id="saved-workouts">
                 <h3> Your Workouts</h3>
                 <hr>
-                <div class="dashboard-workout">
-                        <h4>Push Day</h4>
+                <% for (i=0; i < workouts.length; i++){ %>
+                    <div class="dashboard-workout">
+                        <h4><%= workouts[i].name %></h4>
                         <ul class="exercise-list">
-                                <li>Dumbbell Bench Press</li>
-                                <li>Military Press</li>
-                                <li>Cable Crossover</li>
-                                <li>Dips</li>
-                                <li>Lateral Raises</li>
-                                <li>Tricep Extension</li>
+                            <% for(exercise in workouts[i]){ %>
+                                <% if(exercise.startsWith('exercise') && workouts[i][exercise]){ %>
+                                    <li><%= workouts[i][exercise] %></li>
+                                <% } %>
+                            <% } %>
                         </ul>
-                        <button class="btn btn-dark">Start Workout</button>
+                        <button class="btn btn-dark start-workout-button">Start Workout</button><br>
+                        <button class="btn btn-warning delete-workout-button">Delete</button>
+                        <div class="delete-confirmation collapsed-div">
+                                <p>Are you</p>
+                        </div>
                         <hr>
-                </div>
-                <div class="dashboard-workout">
-                        <h4>Pull Day</h4>
-                        <ul class="exercise-list">
-                                <li>Pull Ups</li>
-                                <li>Bent Over Barbell Row</li>
-                                <li>Seated Cable Row</li>
-                                <li>Back Extensions</li>
-                                <li>Seated Incline Curls</li>
-                                <li>Hammer Curls</li>
-                        </ul>
-                        <button class="btn btn-dark">Start Workout</button>
-                        <hr>
-                </div>
-                <div class="dashboard-workout">
-                        <h4>Leg Day</h4>
-                        <ul class="exercise-list">
-                                <li>Goblet Squats</li>
-                                <li>Reverse Lunges</li>
-                                <li>Barbell Hip Thrusts</li>
-                                <li>Calve Raises</li>
-                                <li>Leg Extensions</li>
-                                <li>Seated Leg Curls</li>
-                        </ul>
-                        <button class="btn btn-dark">Start Workout</button>
-                        <hr>
-                </div>
-                <div class="dashboard-workout">
-                        <h4>Steady State Cardio</h4>
-                        <ul class="exercise-list">
-                                <li>Stair Master</li>
-                                <li>Incline Treadmill</li>
-                        </ul>
-                        <button class="btn btn-dark">Start Workout</button>
-                        <hr>
-                </div>
-                <button class="btn btn-primary">Create New Workout</button>
-        </div>
-</div>
+                    </div>
+                <% } %>
+                <a href="/workouts"><button class="btn btn-primary">Create New Workout</button></a> 
+                
+            </div>
+            
 
 <!-- ChartJS -->
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.2/Chart.min.js"></script>

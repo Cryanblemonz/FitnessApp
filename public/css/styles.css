@@ -100,7 +100,7 @@ h1 {
 }
 
 .goals {
-    margin: 30px 50px;
+    margin: 30px 20px;
     text-align: center;
 }
 
@@ -108,8 +108,10 @@ h1 {
     margin: 10px auto;
 }
 
-.log-button {
-    border-radius: 100%;
+.donut-div .btn{
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
 }
 
 .log-para {
@@ -135,7 +137,7 @@ h1 {
 }
 
 .collapsed-div {
-    display: none !important;
+    display: none!important;
 }
 
 #saved-workouts h3 {
@@ -144,19 +146,30 @@ h1 {
 }
 
 #saved-workouts .btn-primary {
-    width: 100%;
+    width: 90%;
     margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.delete-workout-button{
+        font-size: .7rem;
+        margin: 10px 20px;
+        padding: 0;
+        font-weight: 700;
 }
 
 hr {
-    width: 30%;
+    width: 15%;
     border-style: dotted none none none;
-    border-width: 6px;
+    border-width: 10px;
     margin: 20px auto;
 }
 
 .dashboard-workout {
     text-align: center;
+    position: relative;
 }
 
 h4 {
@@ -258,8 +271,36 @@ h4 {
         #workoutBuilder{
                 width: 100%;
                 margin-top: 25px;       
+        }       
+}
+@media (max-width: 991px){
+        #saved-workouts{
+                height: auto;
+        }
+        .dashboard-workout ul{
+                display: inline-block;
+                margin-left: auto;
+                margin-right: auto;
+        }
+        .start-workout-button { 
+                display: block;
+                margin-right: auto;
+                margin-left: auto;
+        }
+        #saved-workouts .btn-primary {
+                width: 300px;
         }
 }
+/* @media (min-width: 463px) and (max-width: 768px) {
+        .donut-div{
+                position: relative;
+        }
+        .log-button {
+                position: absolute!important;
+                top: 35%!important;
+                right: 0!important;
+        }
+} */
 
 #workoutBuilder ul {
     display: inline-block;
