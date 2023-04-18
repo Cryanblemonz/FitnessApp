@@ -224,8 +224,6 @@ app.post("/showWorkouts", function (req, res) {
     );
 });
 
-// app.posts
-
 app.post("/newUser", function (req, res) {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
@@ -382,6 +380,38 @@ app.post("/saveWorkout", function (req, res) {
       });
   });
   
+//   app.post("/deleteWorkout", function (req,res){
+//     let workoutId = req.body.workoutId;
+//     user.findOneAndUpdate({userName: req.body.userName}, { $pull: {workouts: { _id: workoutId}}})
+//     .then((updatedUser) => {
+//         updatedUser.save()
+//         console.log('deleted successfully workout' + workoutId);
+//         res.redirect('home');
+//     })
+//     .catch(err => {
+//         console.log(err);
+//         res.redirect('home');
+//     })
+//     })
+
+app.post("/deleteWorkout", function (req, res) {
+    let workoutId = req.body.workoutId;
+    user.findOneAndUpdate(
+        { userName: req.session.userName },
+        { $pull: { workouts: { _id: workoutId } } }
+      )
+      .then((updatedUser) => {
+        return updatedUser.save();
+      })
+      .then(() => {
+        console.log("Deleted successfully workout " + workoutId);
+        res.redirect("home");
+      })
+      .catch((err) => {
+        console.error("Error deleting workout", err);
+        res.redirect("home");
+      });
+  });
 
 // Change Water Goal Manually
 app.post("/waterChange", function (req, res) {

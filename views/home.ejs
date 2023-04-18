@@ -73,10 +73,12 @@
                             <% } %>
                         </ul>
                         <button class="btn btn-dark start-workout-button">Start Workout</button><br>
-                        <button class="btn btn-warning delete-workout-button">Delete</button>
-                        <div class="delete-confirmation collapsed-div">
-                                <p>Are you</p>
-                        </div>
+                        <form action="/deleteWorkout" method="post">
+                                <input type="hidden" name="workoutId" value="<%= workouts[i]._id %>">
+
+                                <button type="submit" class="btn btn-warning delete-workout-button">Delete</button>
+                              </form>
+                              
                         <hr>
                     </div>
                 <% } %>

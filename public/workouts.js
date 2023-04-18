@@ -30,14 +30,9 @@ $(function () {
     });
 });
 
-// let showButton = document.getElementById('showWorkoutsBtn');
 let list = document.getElementsByName("exercise");
 let button = document.getElementById("queueButton");
 let arr = [];
-
-// showButton.addEventListener('click', function(){
-//     button.classList.remove('collapsed-div');
-// })
 
 button.addEventListener("click", function (e) {
     e.preventDefault();
