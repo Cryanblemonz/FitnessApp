@@ -4,6 +4,23 @@
         <div class="col-md-9 log-workout-div">
                 <h1 class="page-headings"> 🏋️‍♀️ Lets track some gains 🏋️‍♂️</h1>
                 <h2> Choose a Workout →</h2>
+
+
+                <div id="enter-workout">
+                        <% if (chosenWorkout){ %>
+                        <h4><%=chosenWorkout.name %></h4>
+                                <div class="row">
+                                        <div class="col-md-4">
+                                                <% for(exercise in chosenWorkout){ %>
+                                                        <% if(exercise.startsWith('exercise') && chosenWorkout[exercise]){ %>
+                                                            <p><%= chosenWorkout[exercise] %></p>
+                                                        <% } %>
+                                                </div>
+                                        </div>
+                                <% } %>       
+                        <% } %> 
+
+                </div>
         </div>
         <div class="col-md-3" id="saved-workouts2">
                         <h3> Your Workouts</h3>
@@ -18,24 +35,23 @@
                                         <% } %>
                                     <% } %>
                                 </ul>
-                                <button class="btn btn-dark start-workout-button">Start Workout</button><br>
-                                <form action="/deleteWorkout" method="post">
+                                <form action="/chosenWorkout" method="post">
                                         <input type="hidden" name="workoutId" value="<%= workouts[i]._id %>">
-                
-                                        <button type="submit" class="btn btn-warning delete-workout-button">Delete</button>
-                                      </form>
+                                        <button class="btn btn-dark start-workout-button" type="submit">Log Workout</button><br>
+                                </form>
+
                                       
                                 <hr>
                             </div>
                         <% } %>
+                        <a href="/workouts"><button class="btn btn-primary">Create New Workout</button></a> 
         </div>
 </div>
 
 
 
-        <a href="/workouts"><button class="btn btn-primary">Create New Workout</button></a> 
+
         
-    </div>
 
 
 

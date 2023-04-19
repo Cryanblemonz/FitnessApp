@@ -154,7 +154,7 @@ h1 {
     padding-top: 10px;
 }
 
-#saved-workouts .btn-primary {
+#saved-workouts .btn-primary, #saved-workouts2 .btn-primary {
     width: 90%;
     margin-bottom: 20px;
     display: block;
@@ -370,4 +370,14 @@ h4 {
         position: relative;
         left: 600px;    
 
+}
+
+#enter-workout{
+        width: 500px;
+        display: inline-block;
+}
+
+#enter-workout p{
+        width: auto;
+        display: inline-block;
 }

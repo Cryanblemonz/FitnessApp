@@ -194,7 +194,7 @@ app.get("/logworkout", function(req, res){
     user.findOne({userName: req.session.userName})
     .then(foundUser => {
         let workouts = foundUser.workouts
-        res.render('logworkout', { workouts: workouts} )
+        res.render('logworkout', { workouts: workouts, chosenWorkout: foundUser.workouts[1]} )
     })
 })
 
@@ -389,7 +389,7 @@ app.post("/saveWorkout", function (req, res) {
   });
  
 app.post("/deleteWorkout", function (req, res) {
-    let workoutId = req.body.workoutId;
+    let workoutId = req.body.workoutId; 
     user.findOneAndUpdate(
         { userName: req.session.userName },
         { $pull: { workouts: { _id: workoutId } } }
@@ -406,6 +406,23 @@ app.post("/deleteWorkout", function (req, res) {
         res.redirect("home");
       });
   });
+
+    
+app.post("/chosenWorkout", function(req, res) {
+    let workoutId = req.body.workoutId; 
+    user.findOne({ userName: req.session.userName })
+      .then(foundUser => {
+        let workouts = foundUser.workouts;
+        let chosenWorkout = workouts.find(workout => workout._id == workoutId);
+        res.render('logworkout', { workouts: workouts, chosenWorkout: chosenWorkout });
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  });
+  
+    
 
 // Change Water Goal Manually
 app.post("/waterChange", function (req, res) {
