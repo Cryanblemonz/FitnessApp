@@ -190,6 +190,14 @@ app.post("/queue", (req, res) => {
     }
 });
 
+app.get("/logworkout", function(req, res){
+    user.findOne({userName: req.session.userName})
+    .then(foundUser => {
+        let workouts = foundUser.workouts
+        res.render('logworkout', { workouts: workouts} )
+    })
+})
+
 app.post("/clear", function (req, res) {
     exercises = [];
     console.log(exercises);
@@ -379,21 +387,7 @@ app.post("/saveWorkout", function (req, res) {
         res.redirect("/home");
       });
   });
-  
-//   app.post("/deleteWorkout", function (req,res){
-//     let workoutId = req.body.workoutId;
-//     user.findOneAndUpdate({userName: req.body.userName}, { $pull: {workouts: { _id: workoutId}}})
-//     .then((updatedUser) => {
-//         updatedUser.save()
-//         console.log('deleted successfully workout' + workoutId);
-//         res.redirect('home');
-//     })
-//     .catch(err => {
-//         console.log(err);
-//         res.redirect('home');
-//     })
-//     })
-
+ 
 app.post("/deleteWorkout", function (req, res) {
     let workoutId = req.body.workoutId;
     user.findOneAndUpdate(

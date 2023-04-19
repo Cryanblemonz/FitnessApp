@@ -1,0 +1,46 @@
+<%- include('header') %>
+<%- include('navbar') %>
+<div class="row">
+        <div class="col-md-9 log-workout-div">
+                <h1 class="page-headings"> 🏋️‍♀️ Lets track some gains 🏋️‍♂️</h1>
+                <h2> Choose a Workout →</h2>
+        </div>
+        <div class="col-md-3" id="saved-workouts2">
+                        <h3> Your Workouts</h3>
+                        <hr>
+                        <% for (i=0; i < workouts.length; i++){ %>
+                            <div class="dashboard-workout">
+                                <h4><%= workouts[i].name %></h4>
+                                <ul class="exercise-list">
+                                    <% for(exercise in workouts[i]){ %>
+                                        <% if(exercise.startsWith('exercise') && workouts[i][exercise]){ %>
+                                            <li><%= workouts[i][exercise] %></li>
+                                        <% } %>
+                                    <% } %>
+                                </ul>
+                                <button class="btn btn-dark start-workout-button">Start Workout</button><br>
+                                <form action="/deleteWorkout" method="post">
+                                        <input type="hidden" name="workoutId" value="<%= workouts[i]._id %>">
+                
+                                        <button type="submit" class="btn btn-warning delete-workout-button">Delete</button>
+                                      </form>
+                                      
+                                <hr>
+                            </div>
+                        <% } %>
+        </div>
+</div>
+
+
+
+        <a href="/workouts"><button class="btn btn-primary">Create New Workout</button></a> 
+        
+    </div>
+
+
+
+
+
+
+
+<%- include ('footer') %>
