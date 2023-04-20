@@ -383,12 +383,11 @@ h4 {
         position: absolute;
         right: 0;
         top: 0;
-        height: auto;
-        padding-bottom: 20vh;
+        padding-bottom: 50vh;
         border: 2px solid black;
         border-style: hidden solid hidden solid;
         background-color: rgb(53, 48, 48);
-        overflow-y: scroll;
+        overflow-y:initial;
         color: white;
         z-index: -1;
     }
@@ -456,4 +455,22 @@ h4 {
     padding-left: 20px;
 }
 
+.submit-log-btn{
+width: 40%;
+margin: 20px;
+/* background-color: rgb(99, 114, 245)!important; */
+font-weight: 700;
+}
+
+.log-col label{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.log-col input{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
 

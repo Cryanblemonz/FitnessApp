@@ -6,6 +6,11 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const session = require("express-session");
 let days = [];
+const today = new Date();
+const yyyy = today.getFullYear();
+const mm = today.getMonth() + 1;
+let dd = today.getDate();
+const formattedToday = mm + "/" + dd + "/" + yyyy;
 
 const app = express();
 
@@ -57,7 +62,30 @@ const workoutSchema = mongoose.Schema({
     });
   }
   
-// Workout model
+const loggedExerciseSchema = mongoose.Schema({
+    name: String,
+    sets: Number,
+    reps: Number,
+    weight: Number
+})
+
+const loggedExercise = mongoose.model('loggedExercise', loggedExerciseSchema);
+
+const loggedWorkoutSchema = mongoose.Schema({
+    date: String,
+    workoutName: String,
+})
+
+for (let i = 1; i <= 20; i++) {
+    loggedWorkoutSchema.add({
+      [`exercise${i}`]: {
+        type: loggedExerciseSchema
+      },
+    });
+  }
+
+  const loggedWorkout = mongoose.model('loggedWorkout', loggedWorkoutSchema);
+
 const workout = mongoose.model("workout", workoutSchema);
 
 // UserSchema
@@ -106,6 +134,8 @@ const userSchema = mongoose.Schema({
     days: [daySchema],
 
     workouts: [workoutSchema],
+
+    loggedWorkouts: [loggedWorkoutSchema]
 });
 // User Model
 const user = mongoose.model("user", userSchema);
@@ -191,12 +221,44 @@ app.post("/queue", (req, res) => {
 });
 
 app.get("/logworkout", function(req, res){
+    if (!req.session.isLoggedIn) {
+        res.redirect("/signin");
+        return;
+    }
     user.findOne({userName: req.session.userName})
     .then(foundUser => {
         let workouts = foundUser.workouts
         res.render('logworkout', { workouts: workouts, chosenWorkout: foundUser.workouts[1]} )
     })
 })
+
+
+app.post('/saveLoggedWorkout', function(req,res) {
+    user.findOne({userName: req.session.userName})
+    .then(foundUser => {
+        let logWorkoutArray = [];
+        let workouts = foundUser.workouts;
+        let chosenWorkout = workouts.find(workout => workout.name == req.body.chosenWorkoutName);
+            for (i=1; i < Object.keys(chosenWorkout._doc).length; i++) {
+                const newExercise = new loggedExercise({
+                    name: req.body['exerciseName' + i],
+                    sets: req.body['set' + i],
+                    reps: req.body['rep' + i],
+                    weight: req.body['weight' + i]
+                })
+                logWorkoutArray.push(newExercise);
+                const newWorkout = new loggedWorkout({
+                    name: req.body.chosenWorkoutName,
+                    date: formattedToday
+                })
+                for (let i = 0; i < exercises.length; i++) {
+                    newWorkout[`exercise${i + 1}`] = logWorkoutArray[i];
+                  }
+                foundUser.loggedWorkouts.push(newWorkout);
+            }
+            foundUser.save();
+        })
+    })
 
 app.post("/clear", function (req, res) {
     exercises = [];
@@ -293,11 +355,6 @@ app.post("/newUser", function (req, res) {
 app.post("/signin", function (req, res) {
     const userName = req.body.userName;
     const password = req.body.password;
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = today.getMonth() + 1;
-    let dd = today.getDate();
-    const formattedToday = mm + "/" + dd + "/" + yyyy;
     user.findOne({ userName: userName }).then((foundUser) => {
         // Setup needed session variables
         req.session.userName = foundUser.userName;
