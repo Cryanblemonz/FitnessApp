@@ -85,15 +85,6 @@ h1 {
     color: white;
 }
 
-#saved-workouts2 {
-        height: 120vh;
-        border: 2px solid black;
-        border-style: hidden solid hidden solid;
-        background-color: rgb(53, 48, 48);
-        overflow-y: scroll;
-        color: white;
-    }
-
 .toggle-button {
     display: inline;
     z-index: 1;
@@ -367,17 +358,49 @@ h4 {
 }
 
 .log-workout-div h2{
-        position: relative;
-        left: 600px;    
-
+        margin-left: 200px;
+        font-size: 1.5rem;
 }
 
 #enter-workout{
-        width: 500px;
-        display: inline-block;
+        margin: 50px 10%;
+        text-align: center;
+}
+
+#enter-workout h4{
+        text-align: center;
+        font-weight: 900;
+        font-size: 1.7rem;
 }
 
 #enter-workout p{
-        width: auto;
-        display: inline-block;
+        font-weight: 700;
+        margin: 8px 0;
+}
+
+#saved-workouts2 {
+        height: 120vh;
+        border: 2px solid black;
+        border-style: hidden solid hidden solid;
+        background-color: rgb(53, 48, 48);
+        overflow-y: scroll;
+        color: white;
+    }
+
+#saved-workouts2 h3{
+        text-align: center;
+}
+
+.log-heading{
+        margin-bottom: 0;
+        padding-bottom: 0;
+}
+
+.log-input{
+        width: 100px;
+        margin: 4px 0 5px 0;
+}
+
+.log-input-div{
+        margin-top: 10px;
 }
