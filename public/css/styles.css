@@ -47,6 +47,7 @@ h2 {
 .navbar {
     margin: 0;
     padding: 0;
+    width: 100%;
 }
 
 .navbar a {
@@ -379,28 +380,80 @@ h4 {
 }
 
 #saved-workouts2 {
-        height: 120vh;
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: auto;
+        padding-bottom: 20vh;
         border: 2px solid black;
         border-style: hidden solid hidden solid;
         background-color: rgb(53, 48, 48);
         overflow-y: scroll;
         color: white;
+        z-index: -1;
+    }
+
+    @media(max-width: 880px) {
+        #saved-workouts2 {
+            position: relative;
+            width:100%;
+        }
+        .log-workout-div h2{
+            display: none;
+        }
+        .log-heading{
+            display: none;
+        }
+    }
+
+    @media(min-width: 576px){
+        .log-input-div p{
+            position: relative;
+            top: 30px;
+        }
+    }
+    @media(max-width: 576px){
+        .log-input-div{
+            position: relative;
+            right: 20%;
+        }
+        .log-input{
+            display: inline-block;
+        }
+
+    }
+
+    .log-input-div{
+        position: relative;
     }
 
 #saved-workouts2 h3{
+        padding-top: 50px;
         text-align: center;
+        font-weight: 700;
 }
 
-.log-heading{
-        margin-bottom: 0;
-        padding-bottom: 0;
+#saved-workouts2 .btn-primary{
+    width: 200px;
 }
 
 .log-input{
-        width: 100px;
-        margin: 4px 0 5px 0;
+        width: 60px;
+        margin: 3px 0 3px auto;
+        display: inline-block;
 }
 
 .log-input-div{
         margin-top: 10px;
+        text-align: right;
 }
+
+.log-col{
+    padding-left: 30px;
+}
+
+.log-exercise-name{
+    padding-left: 20px;
+}
+
+

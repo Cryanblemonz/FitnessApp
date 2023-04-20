@@ -1,9 +1,10 @@
 <%- include('header') %>
 <%- include('navbar') %>
+
 <div class="row">
-        <div class="col-md-9 log-workout-div">
+        <div class="col-md-8 log-workout-div">
                 <h1 class="page-headings"> 🏋️‍♀️ Lets track some gains 🏋️‍♂️</h1>
-                <h2> Choose a Workout →</h2>
+                <h2> Choose a Workout</h2>
 
 
                 <div id="enter-workout">
@@ -13,37 +14,33 @@
                         <div class="row">
                                 <div class="container-fluid">
                                         <form>
-                                                <div class="row">
-                                                        <div class="col-md-5 log-heading">
-
-                                                        </div>
-                                                        <div class="col-md-3 log-heading">
-                                                                <p>Sets</p>
-                                                        </div>
-                                                        <div class="col-md-3 log-heading">
-                                                                <p>Reps</p>
-                                                        </div>
-                                                </div>
                                         <% for(exercise in chosenWorkout){ %>
+                                                <% let i = 1 %>
                                                 <% if(exercise.startsWith('exercise') && chosenWorkout[exercise]){ %>
 
                                                         <div class="row log-input-div">
-                                                                <div class="col-sm-5 log-col">
-                                                                        <p><%= chosenWorkout[exercise] %></p>
+                                                                <div class="col-sm-6">
+                                                                        <p class="log-exercise-name"><%= chosenWorkout[exercise] %></p>
                                                                 </div>
-                                                                <div class="col-sm-3 log-col">
+                                                                <div class="col-sm-2 log-col">
+                                                                        <label for="set1">Sets</label>
                                                                         <input class="log-input form-control" type="number" min ='0' name="set1">
                                                                 </div>
-                                                                <div class="col-sm-3 log-col">
+                                                                <div class="col-sm-2 log-col">
+                                                                        <label for="rep1">Reps</label>
+                                                                        <input class="log-input form-control" type="number" min ='0' name="rep1">
+                                                                </div>
+                                                                <div class="col-sm-2 log-col">
+                                                                        <label for="weight1">Weight</label>
                                                                         <input class="log-input form-control" type="number" min ='0' name="rep1">
                                                                 </div>
                                                         </div>
-
+                                                <% i++ %>
                                                 <% } %>
                                         <% } %>      
                                         </form>
                                 </div>
-                                <% } %>     
+                                <% } %>
                         </div> 
                 </div>
         </div>
