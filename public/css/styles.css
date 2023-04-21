@@ -509,7 +509,8 @@ font-weight: 700;
     background-color: rgb(252, 248, 248);
     color: rgb(53, 48, 48);
     border-radius: 5%;
-    max-width: 225px;
+    width: 320px;
+    display: inline-block;
 }
 
 .logged-workout-heading{
@@ -532,4 +533,10 @@ font-weight: 700;
 .display-title p:hover{
     color: rgb(202, 198, 198);
     opacity: 80%;
+}
+
+.logged-workouts-row{
+    display: inline;
+    margin-left: auto;
+    margin-right: auto;
 }

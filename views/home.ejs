@@ -99,73 +99,22 @@
                         <a href='/previousWorkouts'><p>See more...</p></a>
                 </div>
             </div>
-        <div class="row">
-                        <div class="col-lg-2 logged-workout">
-                                <p class="logged-workout-heading">Workout Name</p>
-                                <p class="logged-workout-date">4-21-23</p>
-                                <p>Exercise 1 -- 3 x 10</p> 
-                                <p>Exercise 2 -- 3 x 10</p>
-                                <p>Exercise 3 -- 3 x 10</p>
-                                <p>Exercise 4 -- 3 x 10</p>
-                                <p>Exercise 5 -- 3 x 10</p>
-                                <p>Exercise 6 -- 3 x 10</p>
-                                <p>Exercise 7 -- 3 x 10</p>
-                                <p>Exercise 8 -- 3 x 10</p>
-                        </div>
-                
-                
 
-                <div class="col-lg-2 logged-workout">
-                        <p class="logged-workout-heading">Workout Name</p>
-                        <p class="logged-workout-date">4-20-23</p>
-                        <p>Exercise 1 -- 3 x 10</p> 
-                        <p>Exercise 2 -- 3 x 10</p>
-                        <p>Exercise 3 -- 3 x 10</p>
-                        <p>Exercise 4 -- 3 x 10</p>
-                        <p>Exercise 5 -- 3 x 10</p>
-                        <p>Exercise 6 -- 3 x 10</p>
-                        <p>Exercise 7 -- 3 x 10</p>
-                        <p>Exercise 8 -- 3 x 10</p>
-                </div>
-                <div class="col-lg-2 logged-workout">
-                        <p class="logged-workout-heading">Workout Name</p>
-                        <p class="logged-workout-date">4-19-23</p>
-                        <p>Exercise 1 -- 3 x 10</p> 
-                        <p>Exercise 2 -- 3 x 10</p>
-                        <p>Exercise 3 -- 3 x 10</p>
-                        <p>Exercise 4 -- 3 x 10</p>
-                        <p>Exercise 5 -- 3 x 10</p>
-                        <p>Exercise 6 -- 3 x 10</p>
-                        <p>Exercise 7 -- 3 x 10</p>
-                        <p>Exercise 8 -- 3 x 10</p>
-                </div>
-                <div class="col-lg-2 logged-workout">
-                        <p class="logged-workout-heading">Workout Name</p>
-                        <p class="logged-workout-date">4-18-23</p>
-                        <p>Exercise 1 -- 3 x 10</p> 
-                        <p>Exercise 2 -- 3 x 10</p>
-                        <p>Exercise 3 -- 3 x 10</p>
-                        <p>Exercise 4 -- 3 x 10</p>
-                        <p>Exercise 5 -- 3 x 10</p>
-                        <p>Exercise 6 -- 3 x 10</p>
-                        <p>Exercise 7 -- 3 x 10</p>
-                        <p>Exercise 8 -- 3 x 10</p>
-                </div>
-                <div class="col-lg-2 logged-workout">
-                        <p class="logged-workout-heading">Workout Name</p>
-                        <p class="logged-workout-date">4-17-23</p>
-                        <p>Exercise 1 -- 3 x 10</p> 
-                        <p>Exercise 2 -- 3 x 10</p>
-                        <p>Exercise 3 -- 3 x 10</p>
-                        <p>Exercise 4 -- 3 x 10</p>
-                        <p>Exercise 5 -- 3 x 10</p>
-                        <p>Exercise 6 -- 3 x 10</p>
-                        <p>Exercise 7 -- 3 x 10</p>
-                        <p>Exercise 8 -- 3 x 10</p>
-                </div>
-        </div>
-
-        
+        <div class="row logged-workouts-row">
+                <% for(i = loggedWorkouts.length-1; i >= loggedWorkouts.length-5; i--){ %>
+                  <% if(loggedWorkouts[i]) { %>
+                    <div class="col-lg-3 logged-workout">
+                      <p class="logged-workout-heading"><%= loggedWorkouts[i].name %></p>
+                      <p class="logged-workout-date"><%= loggedWorkouts[i].date %></p>
+                      <% for(j = 1; j <= 8; j++) { %>
+                        <% if(loggedWorkouts[i]['exercise' + j]) { %>
+                          <p><%= loggedWorkouts[i]['exercise' + j].name %> - <%= loggedWorkouts[i]['exercise' + j].sets %> x <%=loggedWorkouts[i]['exercise' + j].reps %></p>
+                        <% } %>
+                      <% } %>
+                    </div>
+                  <% } %>
+                <% } %>
+              </div>
 
 </section>
 <!-- ChartJS -->

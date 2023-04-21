@@ -180,6 +180,7 @@ app.get("/home", function (req, res) {
             workouts: workouts,
             loggedWorkouts: loggedWorkouts
     })
+    console.log(loggedWorkouts);
     });
 });
 
@@ -242,7 +243,7 @@ app.post('/saveLoggedWorkout', function(req,res) {
         let logWorkoutArray = [];
         let workouts = foundUser.workouts;
         let chosenWorkout = workouts.find(workout => workout.name == req.body.chosenWorkoutName);
-            for (i=1; i < Object.keys(chosenWorkout._doc).length; i++) {
+            for (i=1; i < Object.keys(chosenWorkout._doc).length-1; i++) {
                 let newExercise = new loggedExercise({
                     name: req.body['exerciseName' + i],
                     sets: req.body['set' + i],
