@@ -78,12 +78,22 @@ h1 {
 }
 
 #saved-workouts {
-    height: 120vh;
+    height: 92vh;
     border: 2px solid black;
     border-style: hidden solid hidden solid;
-    background-color: rgb(53, 48, 48);
+    background-color: #353030;
     overflow-y: scroll;
     color: white;
+    z-index: 1;
+    scrollbar-color: dark;
+}
+
+#saved-workouts::-webkit-scrollbar{
+    background-color:#353030;
+}
+
+#saved-workouts::-webkit-thumb{
+    background-color:#686868;
 }
 
 .toggle-button {
@@ -162,7 +172,7 @@ h1 {
         background-color: rgb(248, 248, 155)!important;
         position: absolute;
         right: 0;
-        top: -8px;
+        bottom: 20px;
 }
 
 .delete-workout-button:hover{
@@ -410,6 +420,10 @@ h4 {
             position: relative;
             top: 30px;
         }
+        .display-title p{
+            position: relative;
+            display: block;
+        }
     }
     @media(max-width: 576px){
         .log-input-div{
@@ -419,7 +433,6 @@ h4 {
         .log-input{
             display: inline-block;
         }
-
     }
 
     .log-input-div{
@@ -474,3 +487,49 @@ font-weight: 700;
     margin-right: auto;
 }
 
+#logged-workouts-display{
+    background-color: rgb(53, 48, 48);
+    border: 1px solid black;
+    position: relative;
+}
+
+#logged-workouts-display h4{
+    /* font-weight: 700; */
+    text-align: center; 
+    color: rgb(252, 248, 248);
+    padding: 20px;
+    font-size: 1.8rem;
+}
+
+.logged-workout{
+    margin: 0 10px 10px 30px;
+    line-height:.8;
+    border: 1px solid black;
+    padding: 10px 25px;
+    background-color: rgb(252, 248, 248);
+    color: rgb(53, 48, 48);
+    border-radius: 5%;
+    max-width: 225px;
+}
+
+.logged-workout-heading{
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.logged-workout-date{
+    font-size: .8rem;
+}
+
+.display-title p{
+    color: rgb(252, 248, 248);
+    display: inline-block;
+    position: absolute;
+    top: 20px;
+    right: 40px;
+}
+
+.display-title p:hover{
+    color: rgb(202, 198, 198);
+    opacity: 80%;
+}

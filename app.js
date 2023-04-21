@@ -240,29 +240,30 @@ app.post('/saveLoggedWorkout', function(req,res) {
         let workouts = foundUser.workouts;
         let chosenWorkout = workouts.find(workout => workout.name == req.body.chosenWorkoutName);
             for (i=1; i < Object.keys(chosenWorkout._doc).length; i++) {
-                const newExercise = new loggedExercise({
+                let newExercise = new loggedExercise({
                     name: req.body['exerciseName' + i],
                     sets: req.body['set' + i],
                     reps: req.body['rep' + i],
                     weight: req.body['weight' + i]
                 })
                 logWorkoutArray.push(newExercise);
-                const newWorkout = new loggedWorkout({
+            }
+                  let newWorkout = new loggedWorkout({
                     name: req.body.chosenWorkoutName,
                     date: formattedToday
                 })
-                for (let i = 0; i < exercises.length; i++) {
+                for (let i = 0; i < logWorkoutArray.length; i++) {
                     newWorkout[`exercise${i + 1}`] = logWorkoutArray[i];
                   }
-                foundUser.loggedWorkouts.push(newWorkout);
-            }
+            console.log(newWorkout);
+            foundUser.loggedWorkouts.push(newWorkout);
             foundUser.save();
+            res.redirect('/logWorkout')
         })
     })
 
 app.post("/clear", function (req, res) {
     exercises = [];
-    console.log(exercises);
     console.log("array cleared");
     res.redirect("/workouts");
 });
@@ -394,7 +395,6 @@ app.post("/signin", function (req, res) {
                         exerciseProgress: 0,
                         calorieProgress: 0,
                     });
-                    console.log(newDay);
                     foundUser.days.push(newDay);
                     foundUser.save().then(() => {
                         const today = foundUser.days.find(
@@ -428,13 +428,11 @@ app.post("/saveWorkout", function (req, res) {
             newWorkout[`exercise${i + 1}`] = exercises[i];
           }
   
-          console.log(newWorkout);
           foundUser.workouts.push(newWorkout);
           foundUser.save();
         } else {
           console.log("user not found");
         }
-        console.log(req.session.userName);
       })
       .catch((error) => {
         console.log(error);
@@ -594,12 +592,6 @@ app.post("/customCals", function (req, res) {
 app.post("/addWater", function (req, res) {
     user.findOne({ userName: req.session.userName }).then((foundUser) => {
         const today = foundUser.days.find((d) => d.date == req.session.day);
-        console.log(
-            today,
-            req.body.logWater,
-            req.session.waterProgress,
-            today.waterProgress
-        );
         today.waterProgress =
             req.session.waterProgress + Number(req.body.logWater);
         foundUser.save();
@@ -612,12 +604,6 @@ app.post("/addWater", function (req, res) {
 app.post("/addExercise", function (req, res) {
     user.findOne({ userName: req.session.userName }).then((foundUser) => {
         const today = foundUser.days.find((d) => d.date == req.session.day);
-        console.log(
-            today,
-            req.body.logExercise,
-            req.session.exerciseProgress,
-            today.exerciseProgress
-        );
         today.exerciseProgress =
             req.session.exerciseProgress + Number(req.body.logExercise);
         foundUser.save();
@@ -630,12 +616,6 @@ app.post("/addExercise", function (req, res) {
 app.post("/addCalories", function (req, res) {
     user.findOne({ userName: req.session.userName }).then((foundUser) => {
         const today = foundUser.days.find((d) => d.date == req.session.day);
-        console.log(
-            today,
-            Number(req.body.logCalories),
-            req.session.calorieProgress,
-            today.calorieProgress
-        );
         today.calorieProgress =
             req.session.calorieProgress + Number(req.body.logCalories);
         foundUser.save();
