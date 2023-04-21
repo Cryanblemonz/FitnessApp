@@ -72,6 +72,7 @@ const loggedExerciseSchema = mongoose.Schema({
 const loggedExercise = mongoose.model('loggedExercise', loggedExerciseSchema);
 
 const loggedWorkoutSchema = mongoose.Schema({
+    name: String,
     date: String,
     workoutName: String,
 })
@@ -171,11 +172,13 @@ app.get("/home", function (req, res) {
     }
     user.findOne({userName: req.session.userName})
     .then(foundUser => {
-        let workouts = foundUser.workouts
+        let workouts = foundUser.workouts;
+        let loggedWorkouts = foundUser.loggedWorkouts;
         res.render("home", {
             firstName: req.session.firstName,
             timeGreeting: timeGreeting,
-            workouts: workouts
+            workouts: workouts,
+            loggedWorkouts: loggedWorkouts
     })
     });
 });
@@ -228,7 +231,7 @@ app.get("/logworkout", function(req, res){
     user.findOne({userName: req.session.userName})
     .then(foundUser => {
         let workouts = foundUser.workouts
-        res.render('logworkout', { workouts: workouts, chosenWorkout: foundUser.workouts[1]} )
+        res.render('logworkout', { workouts: workouts, chosenWorkout: ""} )
     })
 })
 
@@ -465,10 +468,11 @@ app.post("/deleteWorkout", function (req, res) {
     
 app.post("/chosenWorkout", function(req, res) {
     let workoutId = req.body.workoutId; 
+    let chosenWorkout = "";
     user.findOne({ userName: req.session.userName })
       .then(foundUser => {
         let workouts = foundUser.workouts;
-        let chosenWorkout = workouts.find(workout => workout._id == workoutId);
+        chosenWorkout = workouts.find(workout => workout._id == workoutId);
         res.render('logworkout', { workouts: workouts, chosenWorkout: chosenWorkout });
       })
       .catch(err => {

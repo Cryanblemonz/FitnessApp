@@ -15,7 +15,6 @@
                         <% let i = 1 %> <% for(exercise in chosenWorkout){ %> <%
                         if(exercise.startsWith('exercise') &&
                         chosenWorkout[exercise]){ %>
-
                         <div class="row log-input-div">
                             <div class="col-sm-5">
                                 <p class="log-exercise-name">
@@ -52,9 +51,11 @@
                     </div>
                     <% } %>
                 </div>
-                <button class="btn btn-primary submit-log-btn" type="submit">
+                <% if (chosenWorkout) { %>
+                <button id="submit-log-btn" class="btn btn-primary submit-log-btn" type="submit">
                     Log This Workout
                 </button>
+                <% } %>
             </form>
         </div>
     </div>
@@ -74,13 +75,12 @@
                 <input
                     type="hidden"
                     name="workoutId"
-                    value="<%= workouts[i]._id %>" />
+                    value="<%= workouts[i]._id %>">
                 <button class="btn btn-dark start-workout-button" type="submit">
-                    Log Workout</button
-                ><br />
+                    Log Workout</button>
             </form>
 
-            <hr />
+            <hr>
         </div>
         <% } %>
         <a href="/workouts"
@@ -88,5 +88,6 @@
         >
     </div>
 </div>
+
 
 <%- include ('footer') %>
