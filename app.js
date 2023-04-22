@@ -254,13 +254,15 @@ app.post('/saveLoggedWorkout', function(req,res) {
         let workouts = foundUser.workouts;
         let chosenWorkout = workouts.find(workout => workout.name == req.body.chosenWorkoutName);
             for (i=1; i < Object.keys(chosenWorkout._doc).length-1; i++) {
-                let newExercise = new loggedExercise({
-                    name: req.body['exerciseName' + i],
-                    sets: req.body['set' + i],
-                    reps: req.body['rep' + i],
-                    weight: req.body['weight' + i]
-                })
-                logWorkoutArray.push(newExercise);
+                if (req.body['set' + i] != 0){
+                    let newExercise = new loggedExercise({
+                        name: req.body['exerciseName' + i],
+                        sets: req.body['set' + i],
+                        reps: req.body['rep' + i],
+                        weight: req.body['weight' + i]
+                    })
+                    logWorkoutArray.push(newExercise);
+                }
             }
                   let newWorkout = new loggedWorkout({
                     name: req.body.chosenWorkoutName,
