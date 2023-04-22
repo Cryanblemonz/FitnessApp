@@ -184,7 +184,6 @@ app.get("/home", function (req, res) {
     });
 });
 
-// Display and personalize water, calorie, and exercise goals
 app.get("/setup", function (req, res) {
     if (!req.session.isLoggedIn) {
         res.redirect("/signin");
@@ -216,13 +215,17 @@ app.get("/workouts", function (req, res) {
     }
 });
 
-app.post("/queue", (req, res) => {
-    let selectedExercises = req.body.selectedExercises;
-    if(exercises.length < 20){
-        exercises.push(...selectedExercises);
-        res.sendStatus(200);
+app.get('/previousWorkouts', function (req, res){
+    if (!req.session.isLoggedIn) {
+        res.redirect("/signin");
+        return;
     }
-});
+    user.findOne({userName: req.session.userName})
+    .then(foundUser => {
+        let loggedWorkouts = foundUser.loggedWorkouts
+        res.render('previousWorkouts', {loggedWorkouts: loggedWorkouts})
+    })
+})
 
 app.get("/logworkout", function(req, res){
     if (!req.session.isLoggedIn) {
@@ -236,6 +239,13 @@ app.get("/logworkout", function(req, res){
     })
 })
 
+app.post("/queue", (req, res) => {
+    let selectedExercises = req.body.selectedExercises;
+    if(exercises.length < 20){
+        exercises.push(...selectedExercises);
+        res.sendStatus(200);
+    }
+});
 
 app.post('/saveLoggedWorkout', function(req,res) {
     user.findOne({userName: req.session.userName})

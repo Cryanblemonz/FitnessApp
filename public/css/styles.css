@@ -48,7 +48,9 @@ h2 {
     margin: 0;
     padding: 0;
     width: 100%;
+    font-family: 'Fredericka the Great', cursive;
 }
+
 
 .navbar a {
     color: whitesmoke !important;
@@ -154,6 +156,7 @@ h1 {
 #saved-workouts h3 {
     text-align: center;
     padding-top: 10px;
+    font-size: 1.8rem;
 }
 
 #saved-workouts .btn-primary, #saved-workouts2 .btn-primary {
@@ -173,6 +176,7 @@ h1 {
         position: absolute;
         right: 0;
         bottom: 20px;
+        opacity: 50%;
 }
 
 .delete-workout-button:hover{
@@ -180,6 +184,7 @@ h1 {
         font-size: .9rem;
         z-index: 1;
         background-color: rgb(252, 119, 67)!important;
+        opacity: 1;
 }
 
 hr {
@@ -303,6 +308,8 @@ h4 {
                 display: inline-block;
                 margin-left: auto;
                 margin-right: auto;
+                width: 300px;
+                padding-left: 60px;
         }
         .start-workout-button { 
                 display: block;
@@ -313,16 +320,6 @@ h4 {
                 width: 300px;
         }
 }
-/* @media (min-width: 463px) and (max-width: 768px) {
-        .donut-div{
-                position: relative;
-        }
-        .log-button {
-                position: absolute!important;
-                top: 35%!important;
-                right: 0!important;
-        }
-} */
 
 #workoutBuilder ul {
     display: inline-block;
@@ -433,6 +430,9 @@ h4 {
         .log-input{
             display: inline-block;
         }
+        .display-title p{
+            display: none!important;
+                }
     }
 
     .log-input-div{
@@ -502,24 +502,30 @@ font-weight: 700;
 }
 
 .logged-workout{
-    margin: 0 10px 10px 30px;
+    margin: 15px 30px 30px 15px;
     line-height:.8;
     border: 1px solid black;
-    padding: 10px 25px;
+    padding: 10px;
     background-color: rgb(252, 248, 248);
     color: rgb(53, 48, 48);
     border-radius: 5%;
-    width: 320px;
     display: inline-block;
+    max-width: 320px;
+}
+
+.logged-exercise-para{
+    padding: 4px 20px;
 }
 
 .logged-workout-heading{
     font-size: 1.3rem;
     font-weight: 700;
+    text-align: center; 
 }
 
 .logged-workout-date{
     font-size: .8rem;
+    text-align: center;
 }
 
 .display-title p{
@@ -528,6 +534,7 @@ font-weight: 700;
     position: absolute;
     top: 20px;
     right: 40px;
+    opacity: 80%;
 }
 
 .display-title p:hover{
@@ -536,7 +543,23 @@ font-weight: 700;
 }
 
 .logged-workouts-row{
-    display: inline;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto!important;
+    width: 85%;
+}
+
+.signin-form h1{
+    font-size: 3rem;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    font-family: 'Fredericka the Great', cursive;
+}
+
+.previous-workout{
+    line-height: .8;
+    margin: 25px;
+    border-radius: 1%;
+    border: 1px solid black;
+    background-color:#353030;
+    color: white;
+    padding: 25px;
 }

@@ -60,7 +60,7 @@
 
         </div>
         <div class="col-lg-3" id="saved-workouts">
-                <h3> Your Workouts</h3>
+                <h3> Saved Workouts</h3>
                 <hr>
                 <% for (i=0; i < workouts.length; i++){ %>
                     <div class="dashboard-workout">
@@ -101,14 +101,18 @@
             </div>
 
         <div class="row logged-workouts-row">
-                <% for(i = loggedWorkouts.length-1; i >= loggedWorkouts.length-5; i--){ %>
+                <% for(i = loggedWorkouts.length-1; i >= loggedWorkouts.length-3; i--){ %>
                   <% if(loggedWorkouts[i]) { %>
-                    <div class="col-lg-3 logged-workout">
+                    <div class="col-lg-4 col-xs-12 logged-workout">
                       <p class="logged-workout-heading"><%= loggedWorkouts[i].name %></p>
                       <p class="logged-workout-date"><%= loggedWorkouts[i].date %></p>
+                      <hr>
                       <% for(j = 1; j <= 8; j++) { %>
                         <% if(loggedWorkouts[i]['exercise' + j]) { %>
-                          <p><%= loggedWorkouts[i]['exercise' + j].name %> - <%= loggedWorkouts[i]['exercise' + j].sets %> x <%=loggedWorkouts[i]['exercise' + j].reps %></p>
+                        <div class="logged-exercise-para">
+                                <p><%= loggedWorkouts[i]['exercise' + j].name %></p>
+                                <p><%= loggedWorkouts[i]['exercise' + j].sets %> x <%=loggedWorkouts[i]['exercise' + j].reps %></p>
+                        </div>
                         <% } %>
                       <% } %>
                     </div>
