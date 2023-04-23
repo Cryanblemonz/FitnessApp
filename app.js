@@ -274,8 +274,9 @@ app.post('/saveLoggedWorkout', function(req,res) {
             console.log(newWorkout);
             foundUser.loggedWorkouts.push(newWorkout);
             foundUser.save();
-            res.redirect('/logWorkout')
+            
         })
+        res.redirect('/home')
     })
 
 app.post("/clear", function (req, res) {
@@ -385,7 +386,7 @@ app.post("/signin", function (req, res) {
 
         const foundPassword = foundUser.userPassword;
 
-        bcrypt.compare(password, foundPassword, function (err, result) {
+        bcrypt.compare(password, foundPassword, async function (err, result) {
             if (err) {
                 console.log(err);
             } else if (result) {
@@ -411,19 +412,19 @@ app.post("/signin", function (req, res) {
                         exerciseProgress: 0,
                         calorieProgress: 0,
                     });
-                    foundUser.days.push(newDay);
-                    foundUser.save().then(() => {
+                    foundUser.days.push(newDay)
+                    await foundUser.save().then(() => {
                         const today = foundUser.days.find(
                             (d) => d.date == formattedToday
                         );
                         if (today && today.waterProgress) {
                             req.session.waterProgress = today.waterProgress;
-                            req.session.exerciseProgress =
-                                today.exerciseProgress;
+                            req.session.exerciseProgress = today.exerciseProgress;
                             req.session.calorieProgress = today.calorieProgress;
-                            res.redirect("/home");
+                            console.log(req.session.isLoggedIn);
+                            res.redirect('/home');
                         }
-                    });
+                    })
                 }
             } else {
                 console.log("incorrect password");
