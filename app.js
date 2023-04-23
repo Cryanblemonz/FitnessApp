@@ -180,7 +180,6 @@ app.get("/home", function (req, res) {
             workouts: workouts,
             loggedWorkouts: loggedWorkouts
     })
-    console.log(loggedWorkouts);
     });
 });
 
@@ -271,7 +270,6 @@ app.post('/saveLoggedWorkout', function(req,res) {
                 for (let i = 0; i < logWorkoutArray.length; i++) {
                     newWorkout[`exercise${i + 1}`] = logWorkoutArray[i];
                   }
-            console.log(newWorkout);
             foundUser.loggedWorkouts.push(newWorkout);
             foundUser.save();
             
@@ -281,7 +279,6 @@ app.post('/saveLoggedWorkout', function(req,res) {
 
 app.post("/clear", function (req, res) {
     exercises = [];
-    console.log("array cleared");
     res.redirect("/workouts");
 });
 
@@ -421,7 +418,6 @@ app.post("/signin", function (req, res) {
                             req.session.waterProgress = today.waterProgress;
                             req.session.exerciseProgress = today.exerciseProgress;
                             req.session.calorieProgress = today.calorieProgress;
-                            console.log(req.session.isLoggedIn);
                             res.redirect('/home');
                         }
                     })
@@ -678,6 +674,11 @@ app.get(
         res.json({ waterProgress, exerciseProgress, calorieProgress });
     }
 );
+
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('*', function(req, res){
+    res.render('404');
+  });  
 
 app.listen(3000, function (req, res) {
     console.log("server is running on port 3000");

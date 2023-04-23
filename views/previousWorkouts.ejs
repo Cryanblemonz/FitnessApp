@@ -10,7 +10,7 @@
         <% for(j = 1; j <= 8; j++) { %>
                 <% if(loggedWorkouts[i]['exercise' + j]) { %>
                                 <p><%= loggedWorkouts[i]['exercise' + j].name %></p>
-                                <p><%= loggedWorkouts[i]['exercise' + j].sets %> x <%=loggedWorkouts[i]['exercise' + j].reps %></p>        
+                                <p><%= loggedWorkouts[i]['exercise' + j].sets %> x <%=loggedWorkouts[i]['exercise' + j].reps %> — <%=loggedWorkouts[i]['exercise' + j].weight %> lbs</p>        
 
         <% } %>
 <% } %>

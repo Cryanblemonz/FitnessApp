@@ -48,8 +48,6 @@ button.addEventListener("click", function (e) {
         method: "POST",
         data: { selectedExercises: selectedExercises },
         success: function (response) {
-            console.log("Selected exercises pushed to server-side array.");
-            console.log(selectedExercises);
             let queue = $("#exerciseQueue");
             for (let i = 0; i < selectedExercises.length; i++) {
                 let exercise = selectedExercises[i];

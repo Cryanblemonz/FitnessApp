@@ -8,13 +8,13 @@
                 <button class="toggle-button btn btn-light d-none d-lg-block">></button>
                 <div class="page-headings">
                         <h1><%=timeGreeting %><%=firstName%></h1>
-                        <h2><em>Let's do this.</em></h2>
+                        <h2 class="bold"><em>Let's do this.</em></h2>
                 </div>
 
         <!-- Donut Charts -->
 
-        <div class="goals">
-                <h2>Your goals</h2>
+        <div class="goals center">
+                <h2 class="bold">Your goals</h2>
                 <div class="row">
                         <div class="col-md-4 donut-div">
                                 <canvas id="waterchart" class="donut" width="250" height="250"></canvas>
@@ -22,9 +22,9 @@
 
                                 <div id="addWater" class="collapsed-div">
                                 <form action="addWater" method="post">
-                                        <p class="log-para">I drank </p>
+                                        <p class="log-para bold">I drank </p>
                                         <input class="form-control log-input" type="number" name="logWater">
-                                        <p class="log-para">ounces of water</p>
+                                        <p class="log-para bold">ounces of water</p>
                                         <button class="btn btn-primary log-button" type="submit">Log</button>
                                 </form> 
                                 </div>
@@ -34,9 +34,9 @@
                                 <button id="showExerciseLog" class="btn btn-dark">Log Exercise</button>
                                 <div id="addExercise" class="collapsed-div">
                                         <form action="addExercise" method="post">
-                                                <p class="log-para">I did </p>
+                                                <p class="log-para bold">I did </p>
                                                 <input class="form-control log-input" type="number" name="logExercise">
-                                                <p class="log-para">minutes of exercise</p>
+                                                <p class="log-para bold">minutes of exercise</p>
                                                 <button class="btn btn-dark log-button">Log</button>
                                         </form> 
                                         </div>
@@ -46,9 +46,9 @@
                                 <button id="showCalorieLog" class="btn btn-light">Log Calories</button>
                                         <div id="addCalories" class="collapsed-div">
                                                 <form action="addCalories" method="post">
-                                                        <p class="log-para">I Ate</p>
+                                                        <p class="log-para bold">I Ate</p>
                                                         <input class="form-control log-input" type="number" name="logCalories">
-                                                        <p class="log-para">Calories</p>
+                                                        <p class="log-para bold">Calories</p>
                                                         <button class="btn btn-light log-button">Log</button>
                                                 </form> 
                                         </div>
@@ -60,10 +60,10 @@
 
         </div>
         <div class="col-lg-3" id="saved-workouts">
-                <h3> Saved Workouts</h3>
+                <h3 class="center"> Saved Workouts</h3>
                 <hr>
                 <% for (i=0; i < workouts.length; i++){ %>
-                    <div class="dashboard-workout">
+                    <div class="dashboard-workout center">
                         <h4><%= workouts[i].name %></h4>
                         <ul class="exercise-list">
                             <% for(exercise in workouts[i]){ %>
@@ -83,7 +83,7 @@
                         <form action="/deleteWorkout" method="post">
                                 <input type="hidden" name="workoutId" value="<%= workouts[i]._id %>">
 
-                                <button type="submit" class="btn btn-warning delete-workout-button">Delete</button>
+                                <button type="submit" class="btn btn-warning delete-workout-button bold">Delete</button>
                               </form>
                               
                         <hr>
@@ -95,7 +95,7 @@
             <section  id="logged-workouts-display">
             <div class="row">
                 <div class="col-md-12 display-title">
-                        <h4>Previous Workouts</h4>
+                        <h4 class="center">Previous Workouts</h4>
                         <a href='/previousWorkouts'><p>See more...</p></a>
                 </div>
             </div>
@@ -104,14 +104,14 @@
                 <% for(i = loggedWorkouts.length-1; i >= loggedWorkouts.length-3; i--){ %>
                   <% if(loggedWorkouts[i]) { %>
                     <div class="col-lg-4 col-xs-12 logged-workout">
-                      <p class="logged-workout-heading"><%= loggedWorkouts[i].name %></p>
-                      <p class="logged-workout-date"><%= loggedWorkouts[i].date %></p>
+                      <p class="logged-workout-heading bold center"><%= loggedWorkouts[i].name %></p>
+                      <p class="logged-workout-date center"><%= loggedWorkouts[i].date %></p>
                       <hr>
                       <% for(j = 1; j <= 8; j++) { %>
                         <% if(loggedWorkouts[i]['exercise' + j]) { %>
                         <div class="logged-exercise-para">
                                 <p><%= loggedWorkouts[i]['exercise' + j].name %></p>
-                                <p><%= loggedWorkouts[i]['exercise' + j].sets %> x <%=loggedWorkouts[i]['exercise' + j].reps %></p>
+                                <p><%= loggedWorkouts[i]['exercise' + j].sets %> x <%=loggedWorkouts[i]['exercise' + j].reps %> — <%=loggedWorkouts[i]['exercise' + j].weight %> lbs</p>
                         </div>
                         <% } %>
                       <% } %>

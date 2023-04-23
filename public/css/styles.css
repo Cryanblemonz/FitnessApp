@@ -1,7 +1,6 @@
 body {
     background-color: rgb(252, 248, 248);
     color: black;
-    margin: 0;
     font-family: montserrat;
 }
 
@@ -9,7 +8,7 @@ body {
     border: 1px solid black;
 }
 
-h2 {
+.bold {
     font-weight: 700;
 }
 
@@ -31,7 +30,6 @@ h2 {
 /* Signin */
 
 .signin-form {
-    text-align: center;
     width: 50%;
     margin-left: auto;
     margin-right: auto;
@@ -39,7 +37,9 @@ h2 {
 }
 
 #return-to-signup {
-    font-size: 10px;
+    font-size: 1rem;
+    margin: 25px auto;
+    display: block;
 }
 
 /* Navbar */
@@ -48,20 +48,11 @@ h2 {
     margin: 0;
     padding: 0;
     width: 100%;
-    /* font-family: 'Fredericka the Great', cursive; */
 }
 
 
 .navbar a {
-    color: whitesmoke !important;
-}
-
-.d-flex .form-control {
-    margin-bottom: 10px;
-}
-
-.d-flex button {
-    margin-bottom: 10px;
+    color: whitesmoke!important;
 }
 
 /* Homescreen */
@@ -85,7 +76,7 @@ h1 {
     border-style: hidden solid hidden solid;
     background-color: #353030;
     overflow-y: scroll;
-    color: white;
+    color: whitesmoke;
     z-index: 1;
     scrollbar-color: dark;
 }
@@ -108,13 +99,8 @@ h1 {
     margin: 5px;
 }
 
-.right {
-    right: 0;
-}
-
 .goals {
     margin: 30px 20px;
-    text-align: center;
 }
 
 .donut {
@@ -130,7 +116,6 @@ h1 {
 .log-para {
     padding: 5px 0;
     margin: 0;
-    font-weight: 700;
 }
 
 .log-input {
@@ -154,7 +139,6 @@ h1 {
 }
 
 #saved-workouts h3 {
-    text-align: center;
     padding-top: 10px;
     font-size: 1.8rem;
 }
@@ -171,7 +155,6 @@ h1 {
         font-size: .5rem;
         margin: 10px;
         padding: 0;
-        font-weight: 700;
         background-color: rgb(248, 248, 155)!important;
         position: absolute;
         right: 0;
@@ -195,7 +178,6 @@ hr {
 }
 
 .dashboard-workout {
-    text-align: center;
     position: relative;
 }
 
@@ -257,19 +239,11 @@ h4 {
 #changeExercise,
 #changeWater {
     padding-top: 20px;
-    font-weight: 700;
-    text-align: center;
 }
 
 .changeButton {
     width: 50%;
     margin: 20px;
-}
-
-.changeInputDual {
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .qButton {
@@ -287,10 +261,9 @@ h4 {
     border: 2px solid black;
     border-style: hidden solid hidden solid;
     background-color: rgb(53, 48, 48);
-    color: white;
+    color: whitesmoke;
     position: absolute;
     right: 0;
-    text-align: center;
     overflow-y: scroll;
 }
 
@@ -328,7 +301,6 @@ h4 {
 }
 
 #workoutBuilder h3 {
-    text-align: center;
     padding-top: 5%;
 }
 
@@ -372,18 +344,11 @@ h4 {
 
 #enter-workout{
         margin: 50px 10%;
-        text-align: center;
 }
 
 #enter-workout h4{
-        text-align: center;
         font-weight: 900;
         font-size: 1.7rem;
-}
-
-#enter-workout p{
-        font-weight: 700;
-        margin: 8px 0;
 }
 
 #saved-workouts2 {
@@ -395,7 +360,7 @@ h4 {
         border-style: hidden solid hidden solid;
         background-color: rgb(53, 48, 48);
         overflow-y:initial;
-        color: white;
+        color: whitesmoke;
         z-index: -1;
     }
 
@@ -405,9 +370,6 @@ h4 {
             width:100%;
         }
         .log-workout-div h2{
-            display: none;
-        }
-        .log-heading{
             display: none;
         }
     }
@@ -441,8 +403,6 @@ h4 {
 
 #saved-workouts2 h3{
         padding-top: 50px;
-        text-align: center;
-        font-weight: 700;
 }
 
 #saved-workouts2 .btn-primary{
@@ -471,8 +431,6 @@ h4 {
 .submit-log-btn{
 width: 40%;
 margin: 20px;
-/* background-color: rgb(99, 114, 245)!important; */
-font-weight: 700;
 }
 
 .log-col label{
@@ -494,8 +452,6 @@ font-weight: 700;
 }
 
 #logged-workouts-display h4{
-    /* font-weight: 700; */
-    text-align: center; 
     color: rgb(252, 248, 248);
     padding: 20px;
     font-size: 1.8rem;
@@ -519,13 +475,10 @@ font-weight: 700;
 
 .logged-workout-heading{
     font-size: 1.3rem;
-    font-weight: 700;
-    text-align: center; 
 }
 
 .logged-workout-date{
     font-size: .8rem;
-    text-align: center;
 }
 
 .display-title p{
@@ -551,7 +504,6 @@ font-weight: 700;
     font-size: 3rem;
     margin-bottom: 50px;
     margin-top: 50px;
-    /* font-family: 'Fredericka the Great', cursive; */
     font-family: montserrat;    
     font-weight: 400;
 }
@@ -562,6 +514,14 @@ font-weight: 700;
     border-radius: 1%;
     border: 1px solid black;
     background-color:#353030;
-    color: white;
+    color: whitesmoke;
     padding: 25px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.e404{
+    margin-top: 100px;
 }
