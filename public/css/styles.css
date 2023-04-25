@@ -523,5 +523,12 @@ a{
 }
 
 .e404{
-    margin-top: 100px;
+    margin-top: 50px;
+}
+
+.barbell-pic{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }

@@ -29,7 +29,10 @@ app.use(
 );
 
 // mongo connection
-mongoose.connect("mongodb://127.0.0.1/fitnessDB");
+const MONGODB_URI = 'mongodb+srv://gbc466:%23Bounce466@gymgenie.ptdmye1.mongodb.net/FitnessDB';
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
 
 // Day Schema
 const daySchema = mongoose.Schema({
@@ -680,6 +683,20 @@ app.get('*', function(req, res){
     res.render('404');
   });  
 
-app.listen(3000, function (req, res) {
-    console.log("server is running on port 3000");
+  mongoose.connection.on('connected', () => {
+    console.log(`Mongoose connected to ${MONGODB_URI}`);
+  });
+  
+  mongoose.connection.on('error', (err) => {
+    console.error(`Mongoose connection error: ${err}`);
+  });
+  
+  mongoose.connection.on('disconnected', () => {
+    console.log('Mongoose disconnected');
+  });
+
+const port = 3000;
+
+app.listen(port, function (req, res) {
+    console.log("server is running on port 3000 ");
 });
