@@ -71,13 +71,12 @@ h1 {
 }
 
 #saved-workouts {
-    height: 92vh;
+    height: 114vh;
     border: 2px solid black;
     border-style: hidden solid hidden solid;
     background-color: #353030;
     overflow-y: scroll;
     color: whitesmoke;
-    z-index: 1;
     scrollbar-color: dark;
 }
 
@@ -562,4 +561,29 @@ a{
     margin-top: 200px;
     margin-bottom: 20px;
     font-size: 1.7rem;
+}
+
+#landing-banner p{
+    color: black;
+}
+
+#landing-banner p:hover{
+    opacity: 75%;
+}
+
+#tracking-feature{
+    text-align: center;
+    padding: 50px;
+    background: rgb(229, 241, 245);
+}
+
+
+
+#tracking-feature h2{
+    padding: 20px;
+}
+
+#workout-feature{
+    background-color: rgb(14, 146, 117);
+    height: 100px; 
 }
