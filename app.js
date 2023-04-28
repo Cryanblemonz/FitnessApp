@@ -147,7 +147,11 @@ const user = mongoose.model("user", userSchema);
 // app.gets
 
 app.get("/", function (req, res) {
-    res.redirect("/home");
+    if (!req.session.isLoggedIn) {
+        res.render("landing");
+    } else {
+        res.redirect("/home");
+    }
 });
 
 app.get("/signup", function (req, res) {
@@ -247,7 +251,7 @@ app.post("/queue", (req, res) => {
         exercises.push(...selectedExercises);
         res.sendStatus(200);
     }
-});
+}); 
 
 app.post('/saveLoggedWorkout', function(req,res) {
     user.findOne({userName: req.session.userName})
