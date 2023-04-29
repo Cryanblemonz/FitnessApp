@@ -363,42 +363,9 @@ h4 {
         z-index: -1;
     }
 
-    @media(max-width: 880px) {
-        #saved-workouts2 {
-            position: relative;
-            width:100%;
-        }
-        .log-workout-div h2{
-            display: none;
-        }
-    }
-
-    @media(min-width: 576px){
-        .log-input-div p{
-            position: relative;
-            top: 30px;
-        }
-        .display-title p{
-            position: relative;
-            display: block;
-        }
-    }
-    @media(max-width: 576px){
-        .log-input-div{
-            position: relative;
-            right: 20%;
-        }
-        .log-input{
-            display: inline-block;
-        }
-        .display-title p{
-            display: none!important;
-                }
-    }
-
-    .log-input-div{
-        position: relative;
-    }
+.log-input-div{
+    position: relative;
+}
 
 #saved-workouts2 h3{
         padding-top: 50px;
@@ -558,7 +525,7 @@ a{
 }
 
 #landing-banner .btn{
-    margin-top: 200px;
+    margin-top: 100px;
     margin-bottom: 20px;
     font-size: 1.7rem;
 }
@@ -574,16 +541,80 @@ a{
 #tracking-feature{
     text-align: center;
     padding: 50px;
-    background: rgb(229, 241, 245);
+    background: rgb(252, 248, 248);
 }
-
-
 
 #tracking-feature h2{
     padding: 20px;
 }
 
+#workout-feature h2{
+    padding: 20px;
+}
+
+#tracking-feature img{
+    width: 80%;
+}
+
 #workout-feature{
+    text-align: center;
+    padding: 25px;
+    color: white;
     background-color: rgb(14, 146, 117);
-    height: 100px; 
+}
+
+#workout-feature img{
+    border: 1px solid white;
+    border-radius: 10px;
+    height: 50%;
+}
+
+.login-signup-cta{
+    padding: 5%;
+}
+
+#log-feature{
+    text-align: center;
+    padding: 50px;
+    background: rgb(252, 248, 248);
+}
+
+
+@media(max-width: 880px) {
+    #saved-workouts2 {
+        position: relative;
+        width:100%;
+    }
+    .log-workout-div h2{
+        display: none;
+    }
+}
+
+@media(min-width: 576px){
+    .log-input-div p{
+        position: relative;
+        top: 30px;
+    }
+    .display-title p{
+        position: relative;
+        display: block;
+    }
+}
+@media(max-width: 576px){
+    .log-input-div{
+        position: relative;
+        right: 20%;
+    }
+    .log-input{
+        display: inline-block;
+    }
+    .display-title p{
+        display: none!important;
+    }
+    #landing-banner h1{
+        font-size: 3rem;
+    }
+    #landing-banner h2{
+        font-size: 1.8rem;
+    }
 }
