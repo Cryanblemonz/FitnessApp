@@ -47,7 +47,7 @@ body {
 .navbar {
     margin: 0;
     padding: 0;
-    width: 100%;
+    width: 101%;
 }
 
 
@@ -71,7 +71,7 @@ h1 {
 }
 
 #saved-workouts {
-    height: 114vh;
+    height: 100vh;
     border: 2px solid black;
     border-style: hidden solid hidden solid;
     background-color: #353030;
@@ -81,11 +81,12 @@ h1 {
 }
 
 #saved-workouts::-webkit-scrollbar{
-    background-color:#353030;
+    background-color:#464242;
+    width: 10px;
 }
 
 #saved-workouts::-webkit-thumb{
-    background-color:#686868;
+    background-color:#838383;
 }
 
 .toggle-button {
@@ -449,10 +450,10 @@ margin: 20px;
 
 .display-title p{
     color: rgb(252, 248, 248);
-    display: inline-block;
+    display:block;
     position: absolute;
     top: 20px;
-    right: 40px;
+    right: 40px; 
     opacity: 80%;
 }
 
@@ -505,6 +506,7 @@ a{
 
 #landing-banner{
     background-image: url("/images/background.png");
+    background-position: center;
     background-size: cover;
     width: 100%;
     height: 580px;
@@ -540,7 +542,7 @@ a{
 
 #tracking-feature{
     text-align: center;
-    padding: 50px;
+    padding: 20px;
     background: rgb(252, 248, 248);
 }
 
@@ -554,19 +556,22 @@ a{
 
 #tracking-feature img{
     width: 80%;
+    border: 1px solid white;
+    border-radius: 10px;
 }
 
 #workout-feature{
     text-align: center;
     padding: 25px;
-    color: white;
-    background-color: rgb(14, 146, 117);
+    color: black;
+    background: rgb(168,225,255);
+    background: linear-gradient(186deg, rgba(168,225,255,1) 26%, rgba(14,146,117,1) 74%);
 }
 
 #workout-feature img{
     border: 1px solid white;
     border-radius: 10px;
-    height: 50%;
+    width: 30%;
 }
 
 .login-signup-cta{
@@ -575,10 +580,43 @@ a{
 
 #log-feature{
     text-align: center;
-    padding: 50px;
+    padding: 20px;
     background: rgb(252, 248, 248);
 }
 
+#log-feature h2{
+    padding: 20px;
+}
+
+#log-feature img{
+    width: 90%;
+    margin: 10px;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+#log-feature .row{
+    display: flex;
+    align-items: center;
+}
+
+#cta{
+    text-align: center;
+    padding: 25px;
+    color: black;
+    background: rgb(168,225,255);
+    background: linear-gradient(186deg, rgba(168,225,255,1) 26%, rgba(14,146,117,1) 74%);
+}
+
+#cta h2{
+    margin-bottom: 60px;
+}
+
+.cta-btn{
+    margin: 10px;
+    font-size: 1.7rem;
+    width: auto;
+}
 
 @media(max-width: 880px) {
     #saved-workouts2 {
@@ -594,10 +632,6 @@ a{
     .log-input-div p{
         position: relative;
         top: 30px;
-    }
-    .display-title p{
-        position: relative;
-        display: block;
     }
 }
 @media(max-width: 576px){
@@ -616,5 +650,11 @@ a{
     }
     #landing-banner h2{
         font-size: 1.8rem;
+    }
+    #tracking-feature img{
+        width: 100%;
+    }
+    #workout-feature img{
+        width: 60%;
     }
 }
