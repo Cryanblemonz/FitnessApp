@@ -177,6 +177,12 @@ hr {
     margin: 20px auto;
 }
 
+.demo-button{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
 .dashboard-workout {
     position: relative;
 }
@@ -272,6 +278,9 @@ h4 {
                 width: 100%;
                 margin-top: 25px;       
         }       
+        #showExerciseLog, #showCaloriesLog, #ShowWaterLog, .log-button{
+            margin-bottom: 15px;
+        }
 }
 @media (max-width: 991px){
         #saved-workouts{
@@ -465,6 +474,10 @@ margin: 20px;
 .logged-workouts-row{
     margin: 0 auto!important;
     width: 85%;
+}
+
+.nothing-here{
+    color: white;
 }
 
 .signin-form h1{

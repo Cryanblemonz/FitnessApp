@@ -101,23 +101,27 @@
             </div>
 
         <div class="row logged-workouts-row">
-                <% for(i = loggedWorkouts.length-1; i >= loggedWorkouts.length-3; i--){ %>
-                  <% if(loggedWorkouts[i]) { %>
-                    <div class="col-lg-4 col-xs-12 logged-workout">
-                      <p class="logged-workout-heading bold center"><%= loggedWorkouts[i].name %></p>
-                      <p class="logged-workout-date center"><%= loggedWorkouts[i].date %></p>
-                      <hr>
-                      <% for(j = 1; j <= 8; j++) { %>
-                        <% if(loggedWorkouts[i]['exercise' + j]) { %>
-                        <div class="logged-exercise-para">
-                                <p><%= loggedWorkouts[i]['exercise' + j].name %></p>
-                                <p><%= loggedWorkouts[i]['exercise' + j].sets %> x <%=loggedWorkouts[i]['exercise' + j].reps %> — <%=loggedWorkouts[i]['exercise' + j].weight %> lbs</p>
-                        </div>
+                <%if(loggedWorkouts.length > 0){ %>
+                        <% for(i = loggedWorkouts.length-1; i >= loggedWorkouts.length-3; i--){ %>
+                                <% if(loggedWorkouts[i]) { %>
+                                  <div class="col-lg-4 col-xs-12 logged-workout">
+                                    <p class="logged-workout-heading bold center"><%= loggedWorkouts[i].name %></p>
+                                    <p class="logged-workout-date center"><%= loggedWorkouts[i].date %></p>
+                                     <% for(j = 1; j <= 8; j++) { %>
+                                      <% if(loggedWorkouts[i]['exercise' + j]) { %>
+                                      <div class="logged-exercise-para">
+                                              <p><%= loggedWorkouts[i]['exercise' + j].name %></p>
+                                              <p><%= loggedWorkouts[i]['exercise' + j].sets %> x <%=loggedWorkouts[i]['exercise' + j].reps %> — <%=loggedWorkouts[i]['exercise' + j].weight %> lbs</p>
+                                      </div>
+                                      <% } %>
+                                    <% } %>
+                                  </div>
+                                <% } %>
+                              <% } %>
+                <% } else { %>
+                        <p class="nothing-here center">Nothing here yet...</p>
                         <% } %>
-                      <% } %>
-                    </div>
-                  <% } %>
-                <% } %>
+                
               </div>
 
 </section>
